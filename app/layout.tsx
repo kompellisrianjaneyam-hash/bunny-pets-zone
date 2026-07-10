@@ -17,10 +17,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[#FFF8F0] text-[#2F2017]">
+      <body className="bg-[#FFF8F0] text-[#2F2017] antialiased">
         <Navbar />
 
-        <main>{children}</main>
+        {/* Offset for the fixed navbar */}
+        <main className="pt-24 lg:pt-28">
+          {children}
+        </main>
 
         <Footer />
 
