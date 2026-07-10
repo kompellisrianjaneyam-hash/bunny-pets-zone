@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import {
   ArrowRight,
   Bird,
@@ -70,13 +70,6 @@ const cardVariants: Variants = {
 };
 
 export default function HeroSection() {
-  const shouldReduceMotion = useReducedMotion();
-
-  const floatY = shouldReduceMotion ? undefined : { y: [-8, 8, -8] };
-  const floatTransition = shouldReduceMotion
-    ? undefined
-    : { duration: 6.5, repeat: Infinity, ease: "easeInOut" as const };
-
   return (
     <section
       id="home"
@@ -158,28 +151,15 @@ export default function HeroSection() {
             variants={containerVariants}
             className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start"
           >
-            {statPills.map((pill, index) => {
+            {statPills.map((pill) => {
               const Icon = pill.icon;
 
               return (
                 <motion.div
                   key={pill.label}
                   variants={fadeUpVariants}
-                  animate={
-                    shouldReduceMotion
-                      ? undefined
-                      : { y: [-4, 4, -4] }
-                  }
-                  transition={
-                    shouldReduceMotion
-                      ? undefined
-                      : {
-                          duration: 4.5 + index * 0.4,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }
-                  }
-                  whileHover={{ y: -4, scale: 1.03 }}
+                  whileHover={{ y: -3 }}
+                  transition={{ type: "spring", stiffness: 320, damping: 22 }}
                   className="inline-flex h-11 items-center gap-2 rounded-full border border-white/60 bg-white/40 px-4 text-sm font-bold text-[#2F2017] shadow-[0_10px_28px_rgba(47,32,23,0.05)] backdrop-blur-xl"
                 >
                   <Icon aria-hidden="true" className="h-4 w-4 text-[#D59A3A]" strokeWidth={2.2} />
@@ -197,29 +177,18 @@ export default function HeroSection() {
           animate="visible"
           className="relative mx-auto flex w-full max-w-sm flex-col items-center lg:mx-0 lg:justify-self-center"
         >
-          {/* Floating blurred accent circles */}
+          {/* Static blurred accent circles */}
           <div className="pointer-events-none absolute -inset-10 -z-10">
-            <motion.div
-              animate={floatY}
-              transition={floatTransition}
-              className="absolute -left-6 top-4 h-32 w-32 rounded-full bg-[#D59A3A]/22 blur-3xl"
-            />
-            <motion.div
-              animate={
-                shouldReduceMotion ? undefined : { y: [8, -8, 8] }
-              }
-              transition={floatTransition}
-              className="absolute -right-4 bottom-10 h-36 w-36 rounded-full bg-orange-200/40 blur-3xl"
-            />
+            <div className="absolute -left-6 top-4 h-32 w-32 rounded-full bg-[#D59A3A]/22 blur-3xl" />
+            <div className="absolute -right-4 bottom-10 h-36 w-36 rounded-full bg-orange-200/40 blur-3xl" />
             <div className="absolute right-1/2 top-1/2 h-64 w-64 -translate-y-1/2 translate-x-1/2 rounded-full bg-white/50 blur-[90px]" />
           </div>
 
           {/* Single liquid-glass card */}
           <motion.div
-            animate={floatY}
-            transition={floatTransition}
-            whileHover={{ scale: 1.015 }}
-            className="relative w-full overflow-hidden rounded-[2.25rem] border border-white/60 bg-white/35 p-7 text-center shadow-[0_30px_90px_rgba(47,32,23,0.14)] backdrop-blur-2xl sm:p-9"
+            whileHover={{ y: -3 }}
+            transition={{ type: "spring", stiffness: 300, damping: 24 }}
+            className="relative w-full overflow-hidden rounded-[2.25rem] border border-white/60 bg-white/35 p-7 text-center shadow-[0_20px_60px_rgba(47,32,23,0.10)] backdrop-blur-2xl sm:p-9"
           >
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/50 via-white/10 to-[#D59A3A]/10" />
             <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/90 to-transparent" />
