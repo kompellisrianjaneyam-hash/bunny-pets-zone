@@ -1,21 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
-});
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import FloatingActions from "@/components/layout/FloatingActions";
 
 export const metadata: Metadata = {
   title: "Bunny Pets Zone",
-  description: "Premium Pet Store",
+  description: "Premium Pet Store in Hyderabad",
 };
 
 export default function RootLayout({
@@ -25,8 +17,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${poppins.variable}`}>
-        {children}
+      <body className="bg-[#FFF8F0] text-[#2F2017]">
+        <Navbar />
+
+        <main>{children}</main>
+
+        <Footer />
+
+        <FloatingActions />
       </body>
     </html>
   );

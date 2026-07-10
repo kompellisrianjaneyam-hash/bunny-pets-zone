@@ -1,18 +1,20 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { Menu, Phone, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
-type NavItem = {
-  label: string;
-  href: string;
+const settings = {
+  businessName: "Bunny Pets Zone",
+  address: "Kondapur, Hyderabad",
+  phone: "7680904157",
+  logo: "/logos/bunny-pets-zone-logo.png",
 };
 
-const navItems = [
+const navLinks = [
   { label: "Home", href: "/" },
   { label: "Pets", href: "/pets" },
   { label: "Gallery", href: "/gallery" },
@@ -20,263 +22,272 @@ const navItems = [
   { label: "Contact", href: "/contact" },
 ];
 
-const phoneHref = "tel:7680904157";
+const navbarVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: -18,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.58,
+      ease: [0.22, 1, 0.36, 1],
+      staggerChildren: 0.06,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: -8,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const mobileMenuVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: -10,
+    scale: 0.98,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.32,
+      ease: [0.22, 1, 0.36, 1],
+      staggerChildren: 0.055,
+      delayChildren: 0.04,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -8,
+    scale: 0.98,
+    transition: {
+      duration: 0.2,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+function isActivePath(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function classNames(...classes: Array<string | false>) {
+  return classes.filter(Boolean).join(" ");
+}
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeHash, setActiveHash] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const updateHash = () => setActiveHash(window.location.hash);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
 
-    updateHash();
-    window.addEventListener("hashchange", updateHash);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
-    return () => window.removeEventListener("hashchange", updateHash);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {
-    if (!isMenuOpen) return;
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "";
-    };
-  }, [isMenuOpen]);
-
-  const activeHref = useMemo(() => {
-    if (pathname === "/" && activeHash) {
-      return `/${activeHash}`;
-    }
-
-    return pathname === "/" ? "/" : pathname;
-  }, [activeHash, pathname]);
-
-  const closeMenu = () => setIsMenuOpen(false);
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   return (
-    <>
-      <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
-        <nav
-          aria-label="Primary navigation"
-          className="mx-auto flex h-20 max-w-7xl items-center justify-between rounded-[2rem] border border-[#ECECEC] bg-white/78 px-4 shadow-[0_18px_60px_rgba(47,32,23,0.10)] backdrop-blur-xl transition-all duration-300 sm:px-6 lg:px-7"
-        >
-          <Link
-            href="/"
-            aria-label="Bunny Pets Zone home"
-            onClick={closeMenu}
-            className="flex min-w-0 items-center gap-3 rounded-2xl outline-none transition duration-300 hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]"
+    <motion.header
+      variants={navbarVariants}
+      initial="hidden"
+      animate="visible"
+      className="fixed left-0 right-0 top-0 z-50"
+    >
+      <motion.nav
+        variants={itemVariants}
+        aria-label="Primary navigation"
+        className={classNames(
+          "relative w-full overflow-hidden border-b px-4 py-3 shadow-[0_18px_70px_rgba(47,32,23,0.10)] backdrop-blur-2xl backdrop-saturate-150 transition-all duration-500 sm:px-6 lg:px-8",
+          isScrolled
+            ? "border-white/75 bg-white/82 shadow-[0_22px_86px_rgba(47,32,23,0.16)]"
+            : "border-white/55 bg-white/56 shadow-[0_16px_64px_rgba(47,32,23,0.10)]",
+        )}
+      >
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/58 via-white/18 to-[#D59A3A]/10" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/90 to-transparent" />
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D59A3A]/18 to-transparent" />
+        <div className="pointer-events-none absolute -left-20 top-1/2 h-32 w-72 -translate-y-1/2 rounded-full bg-white/34 blur-3xl" />
+        <div className="pointer-events-none absolute -right-20 top-1/2 h-32 w-72 -translate-y-1/2 rounded-full bg-[#D59A3A]/12 blur-3xl" />
+
+        <div className="relative mx-auto flex h-[70px] w-full items-center justify-between gap-8">
+          <motion.div
+            variants={itemVariants}
+            className="flex min-w-0 flex-1 justify-start"
           >
-            <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#ECECEC] sm:h-14 sm:w-14">
-              <Image
-                src="/logos/bunny-pets-zone-logo.png"
-                alt="Bunny Pets Zone logo"
-                fill
-                priority
-                sizes="56px"
-                className="object-contain p-1"
-              />
-            </span>
-
-            <span className="hidden min-w-0 flex-col sm:flex">
-              <span className="truncate text-base font-bold leading-tight text-[#2F2017]">
-                Bunny Pets Zone
+            <Link
+              href="/"
+              aria-label="Bunny Pets Zone home"
+              className="group flex min-w-0 items-center gap-3 rounded-full outline-none transition duration-300 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]"
+            >
+              <span className="relative flex h-[52px] w-[52px] shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/85 bg-white/72 shadow-xl shadow-[#D59A3A]/12 ring-1 ring-[#D59A3A]/8 transition duration-300 group-hover:scale-105 group-hover:shadow-[#D59A3A]/22">
+                <Image
+                  src={settings.logo}
+                  alt={`${settings.businessName} logo`}
+                  width={52}
+                  height={52}
+                  priority
+                  className="h-full w-full object-cover"
+                />
               </span>
-              <span className="truncate text-xs font-semibold leading-tight text-[#5B4A3F]/75">
-                Kondapur, Hyderabad
-              </span>
-            </span>
-          </Link>
 
-          <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-10 lg:flex">
-            {navItems.map((item) => {
-              const active = activeHref === item.href;
+              <span className="hidden min-w-0 leading-none sm:block">
+                <span className="block truncate font-[Poppins] text-[15px] font-bold tracking-tight text-[#2F2017]">
+                  {settings.businessName}
+                </span>
+                <span className="mt-1.5 block truncate font-[Inter] text-[11px] font-semibold tracking-[0.01em] text-[#5B4A3F]/78">
+                  {settings.address}
+                </span>
+              </span>
+            </Link>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="hidden items-center justify-center gap-1 rounded-full border border-white/60 bg-white/42 p-1.5 shadow-inner shadow-white/60 backdrop-blur-2xl lg:flex"
+          >
+            {navLinks.map((link) => {
+              const isActive = isActivePath(pathname, link.href);
 
               return (
                 <Link
-                  key={item.label}
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  className={[
-                    "group relative rounded-full py-2 text-sm font-semibold outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-white",
-                    active
-                      ? "text-[#D59A3A]"
-                      : "text-[#2F2017] hover:text-[#D59A3A]",
-                  ].join(" ")}
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive ? "page" : undefined}
+                    className={classNames(
+                    "group relative inline-flex h-10 items-center justify-center rounded-full px-5 font-[Inter] text-[13px] font-bold tracking-tight outline-none transition duration-300 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]",
+                    isActive
+                      ? "bg-[#D59A3A]/13 text-[#D59A3A] shadow-lg shadow-[#D59A3A]/10"
+                      : "text-[#2F2017]/82 hover:text-[#D59A3A]",
+                  )}
                 >
-                  {item.label}
+                  <span>{link.label}</span>
                   <span
-                    className={[
-                      "absolute -bottom-1 left-1/2 h-1 rounded-full bg-[#D59A3A] transition-all duration-300",
-                      active
-                        ? "w-5 -translate-x-1/2 opacity-100"
-                        : "w-0 -translate-x-1/2 opacity-0 group-hover:w-5 group-hover:opacity-100",
-                    ].join(" ")}
+                    className={classNames(
+                      "absolute bottom-1.5 left-1/2 h-0.5 -translate-x-1/2 rounded-full bg-[#D59A3A] transition-all duration-300",
+                      isActive ? "w-5" : "w-0 group-hover:w-5",
+                    )}
                   />
                 </Link>
               );
             })}
-          </div>
+          </motion.div>
 
-          <div className="flex items-center gap-3">
-            <Link
-              href={phoneHref}
-              aria-label="Call Bunny Pets Zone"
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[#D59A3A] px-4 text-sm font-bold text-white shadow-[0_12px_30px_rgba(213,154,58,0.26)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#c68b31] hover:shadow-[0_16px_38px_rgba(213,154,58,0.32)] focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-white sm:px-5"
+          <motion.div
+            variants={itemVariants}
+            className="hidden flex-1 justify-end pr-1 lg:flex"
+          >
+            <a
+              href={`tel:${settings.phone}`}
+              className="group relative inline-flex h-11 items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-[#D59A3A] via-[#E7B85C] to-[#C6852F] px-5 font-[Inter] text-[13px] font-bold text-white shadow-xl shadow-[#D59A3A]/25 outline-none transition duration-300 hover:-translate-y-0.5 hover:scale-[1.03] hover:shadow-2xl hover:shadow-[#D59A3A]/35 focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]"
             >
-              <Phone aria-hidden="true" className="h-4 w-4" strokeWidth={2.2} />
-              <span className="hidden sm:inline">Call Now</span>
-            </Link>
+              <span className="absolute inset-x-0 top-0 h-1/2 bg-white/20 opacity-80 transition duration-300 group-hover:opacity-100" />
+              <span className="absolute -left-8 top-0 h-full w-6 rotate-12 bg-white/30 blur-sm transition duration-700 group-hover:left-[120%]" />
+              <Phone
+                aria-hidden="true"
+                className="relative h-4 w-4"
+                strokeWidth={2.2}
+              />
+              <span className="relative">Call Now</span>
+            </a>
+          </motion.div>
 
-            <button
-              type="button"
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-              aria-controls="mobile-navigation"
-              aria-expanded={isMenuOpen}
-              onClick={() => setIsMenuOpen((current) => !current)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#ECECEC] bg-white/72 text-[#2F2017] shadow-sm outline-none transition duration-300 hover:text-[#D59A3A] focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-white lg:hidden"
-            >
-              {isMenuOpen ? (
-                <X aria-hidden="true" className="h-5 w-5" strokeWidth={2.2} />
-              ) : (
-                <Menu
-                  aria-hidden="true"
-                  className="h-5 w-5"
-                  strokeWidth={2.2}
-                />
-              )}
-            </button>
-          </div>
-        </nav>
-      </header>
+          <motion.button
+            variants={itemVariants}
+            type="button"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
+            onClick={() => setIsMobileMenuOpen((current) => !current)}
+            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/70 bg-white/58 text-[#2F2017] shadow-lg shadow-[#2F2017]/5 outline-none backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:text-[#D59A3A] focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0] lg:hidden"
+          >
+            {isMobileMenuOpen ? (
+              <X aria-hidden="true" className="h-5 w-5" strokeWidth={2.2} />
+            ) : (
+              <Menu
+                aria-hidden="true"
+                className="h-5 w-5"
+                strokeWidth={2.2}
+              />
+            )}
+          </motion.button>
+        </div>
+      </motion.nav>
 
       <AnimatePresence>
-        {isMenuOpen ? (
-          <>
-            <motion.button
-              type="button"
-              aria-label="Close mobile navigation overlay"
-              className="fixed inset-0 z-40 bg-black/10 backdrop-blur-[2px] lg:hidden"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={closeMenu}
-            />
+        {isMobileMenuOpen ? (
+          <motion.div
+            variants={mobileMenuVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="mx-4 mt-3 overflow-hidden rounded-[2rem] border border-white/65 bg-white/82 p-3 shadow-[0_28px_90px_rgba(47,32,23,0.18)] backdrop-blur-2xl backdrop-saturate-150 sm:mx-6 lg:hidden"
+          >
+            <div className="grid gap-1">
+              {navLinks.map((link) => {
+                const isActive = isActivePath(pathname, link.href);
 
-            <motion.aside
-              id="mobile-navigation"
-              aria-label="Mobile navigation"
-              className="fixed bottom-4 right-4 top-4 z-50 flex w-[min(calc(100vw-2rem),380px)] flex-col overflow-hidden rounded-[2rem] border border-[#ECECEC] bg-[#FFF8F0]/92 p-5 shadow-[0_24px_80px_rgba(47,32,23,0.18)] backdrop-blur-2xl lg:hidden"
-              initial={{ opacity: 0, x: 36, scale: 0.98 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: 36, scale: 0.98 }}
-              transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div className="flex items-center justify-between gap-4">
-                <Link
-                  href="/"
-                  aria-label="Bunny Pets Zone home"
-                  onClick={closeMenu}
-                  className="flex min-w-0 items-center gap-3 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]"
-                >
-                  <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[#ECECEC]">
-                    <Image
-                      src="/logos/bunny-pets-zone-logo.png"
-                      alt="Bunny Pets Zone logo"
-                      fill
-                      sizes="48px"
-                      className="object-contain p-1"
-                    />
-                  </span>
-
-                  <span className="min-w-0">
-                    <span className="block truncate text-sm font-bold leading-tight text-[#2F2017]">
-                      Bunny Pets Zone
-                    </span>
-                    <span className="block truncate text-xs font-semibold leading-tight text-[#5B4A3F]/75">
-                      Kondapur, Hyderabad
-                    </span>
-                  </span>
-                </Link>
-
-                <button
-                  type="button"
-                  aria-label="Close menu"
-                  onClick={closeMenu}
-                  className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#ECECEC] bg-white/72 text-[#2F2017] outline-none transition duration-300 hover:text-[#D59A3A] focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]"
-                >
-                  <X aria-hidden="true" className="h-5 w-5" strokeWidth={2.2} />
-                </button>
-              </div>
-
-              <nav className="mt-10 flex flex-col gap-2" aria-label="Mobile menu links">
-                {navItems.map((item, index) => {
-                  const active = activeHref === item.href;
-
-                  return (
-                    <motion.div
-                      key={item.label}
-                      initial={{ opacity: 0, x: 18 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: 0.22,
-                        delay: 0.06 + index * 0.04,
-                        ease: [0.22, 1, 0.36, 1],
-                      }}
+                return (
+                  <motion.div key={link.href} variants={itemVariants}>
+                    <Link
+                      href={link.href}
+                      aria-current={isActive ? "page" : undefined}
+                      className={classNames(
+                        "flex h-12 items-center rounded-2xl px-4 font-[Inter] text-sm font-bold outline-none transition duration-300 focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-white",
+                        isActive
+                          ? "bg-[#D59A3A]/12 text-[#D59A3A]"
+                          : "text-[#2F2017] hover:bg-[#FFF8F0]/80 hover:text-[#D59A3A]",
+                      )}
                     >
-                      <Link
-                        href={item.href}
-                        onClick={closeMenu}
-                        aria-current={active ? "page" : undefined}
-                        className={[
-                          "flex h-14 items-center justify-between rounded-2xl px-5 text-base font-bold outline-none transition duration-300 focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]",
-                          active
-                            ? "bg-white/80 text-[#D59A3A] shadow-sm"
-                            : "text-[#2F2017] hover:bg-white/64 hover:text-[#D59A3A]",
-                        ].join(" ")}
-                      >
-                        <span>{item.label}</span>
-                        <span
-                          className={[
-                            "h-2 w-2 rounded-full transition",
-                            active ? "bg-[#D59A3A]" : "bg-transparent",
-                          ].join(" ")}
-                        />
-                      </Link>
-                    </motion.div>
-                  );
-                })}
-              </nav>
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                );
+              })}
 
-              <div className="mt-auto pt-8">
-                <Link
-                  href={phoneHref}
-                  aria-label="Call Bunny Pets Zone"
-                  onClick={closeMenu}
-                  className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-[#D59A3A] px-6 text-base font-bold text-white shadow-[0_16px_38px_rgba(213,154,58,0.28)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#c68b31] focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]"
+              <motion.div variants={itemVariants} className="pt-2">
+                <a
+                  href={`tel:${settings.phone}`}
+                  className="group relative inline-flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-[#D59A3A] via-[#E7B85C] to-[#C6852F] px-6 font-[Inter] text-sm font-bold text-white shadow-xl shadow-[#D59A3A]/25 outline-none transition duration-300 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-[#D59A3A]/35 focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-white"
                 >
+                  <span className="absolute inset-x-0 top-0 h-1/2 bg-white/20 opacity-80 transition duration-300 group-hover:opacity-100" />
                   <Phone
                     aria-hidden="true"
-                    className="h-5 w-5"
+                    className="relative h-4 w-4"
                     strokeWidth={2.2}
                   />
-                  <span>Call Now</span>
-                </Link>
-              </div>
-            </motion.aside>
-          </>
+                  <span className="relative">Call Now</span>
+                </a>
+              </motion.div>
+            </div>
+          </motion.div>
         ) : null}
       </AnimatePresence>
-    </>
+    </motion.header>
   );
 }
