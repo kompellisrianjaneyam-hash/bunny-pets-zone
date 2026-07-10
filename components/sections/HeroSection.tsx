@@ -73,7 +73,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className={`relative isolate flex min-h-[80vh] items-center overflow-hidden bg-[#FFF8F0] px-4 pb-16 pt-[170px] ${FONT_BODY} scroll-mt-[170px] sm:px-6 lg:min-h-[88vh] lg:px-8 lg:pb-20 lg:pt-[190px]`}
+      className={`relative isolate flex min-h-[80vh] items-center overflow-hidden bg-[#FFF8F0] px-4 pb-16 pt-[230px] ${FONT_BODY} scroll-mt-[230px] sm:px-6 sm:pt-[170px] sm:scroll-mt-[170px] lg:min-h-[88vh] lg:px-8 lg:pb-20 lg:pt-[190px] lg:scroll-mt-[190px]`}
     >
       {/* Ambient background: layered blurred lights + subtle grid, no flat gradients */}
       <div className="pointer-events-none absolute inset-0 -z-10">
