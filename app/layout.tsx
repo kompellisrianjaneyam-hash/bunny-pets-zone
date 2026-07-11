@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Bunny Pets Zone",
-    template: "%s | Bunny Pets Zone",
+  title: "Bunny Pets Zone | Premium Pet Store in Hyderabad",
+  description:
+    "Bunny Pets Zone is a trusted pet store in Kondapur, Hyderabad offering healthy dogs, cats, birds and hamsters.",
+
+  icons: {
+    icon: "/logos/bunny-pets-zone-logo.png",
+    shortcut: "/logos/bunny-pets-zone-logo.png",
+    apple: "/logos/bunny-pets-zone-logo.png",
   },
-  description: "Premium Pet Store in Hyderabad",
 };
 
 export default function RootLayout({

@@ -38,10 +38,10 @@ const statusLabels: Record<Pet["status"], string> = {
 
 const statusStyles: Record<Pet["status"], string> = {
   available:
-    "border-emerald-200/80 bg-emerald-50/78 text-emerald-700 shadow-emerald-900/5",
-  sold_out: "border-red-200/80 bg-red-50/78 text-red-700 shadow-red-900/5",
+    "border-emerald-700/15 bg-emerald-50/88 text-emerald-800 shadow-emerald-950/5",
+  sold_out: "border-red-700/15 bg-red-50/88 text-red-800 shadow-red-950/5",
   coming_soon:
-    "border-amber-200/80 bg-amber-50/78 text-amber-700 shadow-amber-900/5",
+    "border-amber-700/15 bg-amber-50/88 text-amber-800 shadow-amber-950/5",
 };
 
 const containerVariants: Variants = {
@@ -152,10 +152,11 @@ export default function FeaturedPets() {
       className="relative isolate overflow-hidden bg-[#FFF8F0] px-4 py-20 font-[Inter] sm:px-6 sm:py-24 lg:px-8"
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(213,154,58,0.13),transparent_30%),radial-gradient(circle_at_84%_18%,rgba(255,214,153,0.30),transparent_28%),radial-gradient(circle_at_50%_92%,rgba(255,255,255,0.70),transparent_32%),linear-gradient(180deg,#FFF8F0_0%,#FFF3E6_52%,#FFF8F0_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(213,154,58,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(213,154,58,0.035)_1px,transparent_1px)] bg-[size:52px_52px] [mask-image:radial-gradient(ellipse_at_center,black_0%,transparent_72%)]" />
-        <div className="absolute -left-28 top-16 h-80 w-80 rounded-full bg-[#D59A3A]/10 blur-3xl" />
-        <div className="absolute -right-28 bottom-10 h-96 w-96 rounded-full bg-orange-200/42 blur-3xl" />
+        <div className="absolute inset-0 bg-[#FFF9EF]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(247,235,221,0.88),transparent_34%),radial-gradient(circle_at_84%_18%,rgba(201,144,69,0.12),transparent_30%),radial-gradient(circle_at_50%_92%,rgba(255,255,255,0.66),transparent_34%),linear-gradient(180deg,#FFF9EF_0%,#FFF4E4_52%,#FFF9EF_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,transparent_0%,rgba(58,36,26,0.025)_46%,transparent_74%)]" />
+        <div className="absolute -left-28 top-16 h-80 w-80 rounded-full bg-[#F7EBDD]/58 blur-3xl" />
+        <div className="absolute -right-28 bottom-10 h-96 w-96 rounded-full bg-[#C99045]/10 blur-3xl" />
       </div>
 
       <Container>
@@ -164,27 +165,31 @@ export default function FeaturedPets() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
-          className="mx-auto max-w-3xl text-center"
+          className="relative left-1/2 mx-0 flex w-screen -translate-x-1/2 flex-col items-center px-4 text-center sm:px-6 lg:px-8"
         >
           <motion.div
             variants={fadeUpVariants}
-            className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/54 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D59A3A] shadow-lg shadow-[#D59A3A]/5 backdrop-blur-2xl"
+            className="inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-[#3A241A]/10 bg-[#FFF9EF]/70 px-4 py-2 text-center text-xs font-bold uppercase tracking-[0.18em] text-[#8D5B26] shadow-lg shadow-[#3A241A]/5 backdrop-blur-2xl"
           >
-            <Sparkles aria-hidden="true" className="h-4 w-4" strokeWidth={2} />
+            <Sparkles
+              aria-hidden="true"
+              className="h-4 w-4 text-[#B77932]"
+              strokeWidth={2}
+            />
             <span>Meet Your New Best Friend</span>
           </motion.div>
 
           <motion.h2
             id="featured-pets-heading"
             variants={fadeUpVariants}
-            className="mt-7 text-balance font-[Poppins] text-4xl font-bold leading-tight tracking-tight text-[#2F2017] sm:text-5xl lg:text-6xl"
+            className="mx-auto mt-7 w-full max-w-3xl text-center text-balance font-[Poppins] text-4xl font-bold leading-tight tracking-tight text-[#2A1B14] sm:text-5xl lg:text-6xl"
           >
             Featured Pets
           </motion.h2>
 
           <motion.p
             variants={fadeUpVariants}
-            className="mx-auto mt-5 max-w-[600px] text-pretty text-lg leading-8 text-[#5B4A3F] sm:text-xl"
+            className="mx-auto mt-5 max-w-[600px] text-center text-pretty text-lg leading-8 text-[#5E4A3D] sm:text-xl"
           >
             Discover loving companions waiting to become part of your family.
           </motion.p>
@@ -202,24 +207,24 @@ export default function FeaturedPets() {
               <motion.article
                 key={index}
                 variants={cardVariants}
-                className="relative overflow-hidden rounded-[2.25rem] border border-white/60 bg-white/52 p-2 shadow-[0_24px_80px_rgba(47,32,23,0.10)] backdrop-blur-2xl"
+                className="relative overflow-hidden rounded-[2.25rem] border border-[#3A241A]/10 bg-[#FFF9EF]/62 p-2 shadow-[0_24px_80px_rgba(58,36,26,0.10)] backdrop-blur-2xl"
               >
                 <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/90 to-transparent" />
-                <div className="aspect-[5/4] animate-pulse rounded-[1.8rem] bg-[#D59A3A]/10" />
+                <div className="aspect-[5/4] animate-pulse rounded-[1.8rem] bg-[#B77932]/10" />
                 <div className="p-5">
                   <div className="flex items-center justify-between gap-4">
-                    <div className="h-8 w-28 animate-pulse rounded-full bg-[#D59A3A]/10" />
-                    <div className="h-8 w-8 animate-pulse rounded-full bg-[#D59A3A]/10" />
+                    <div className="h-8 w-28 animate-pulse rounded-full bg-[#B77932]/10" />
+                    <div className="h-8 w-8 animate-pulse rounded-full bg-[#B77932]/10" />
                   </div>
-                  <div className="mt-5 h-8 w-4/5 animate-pulse rounded-full bg-[#D59A3A]/10" />
-                  <div className="mt-4 h-12 w-full animate-pulse rounded-2xl bg-[#D59A3A]/10" />
+                  <div className="mt-5 h-8 w-4/5 animate-pulse rounded-full bg-[#B77932]/10" />
+                  <div className="mt-4 h-12 w-full animate-pulse rounded-2xl bg-[#B77932]/10" />
                   <div className="mt-5 grid gap-3">
-                    <div className="h-4 w-full animate-pulse rounded-full bg-[#D59A3A]/10" />
-                    <div className="h-4 w-4/5 animate-pulse rounded-full bg-[#D59A3A]/10" />
+                    <div className="h-4 w-full animate-pulse rounded-full bg-[#B77932]/10" />
+                    <div className="h-4 w-4/5 animate-pulse rounded-full bg-[#B77932]/10" />
                   </div>
                   <div className="mt-6 grid grid-cols-2 gap-3">
-                    <div className="h-12 animate-pulse rounded-full bg-[#D59A3A]/10" />
-                    <div className="h-12 animate-pulse rounded-full bg-[#D59A3A]/10" />
+                    <div className="h-12 animate-pulse rounded-full bg-[#B77932]/10" />
+                    <div className="h-12 animate-pulse rounded-full bg-[#B77932]/10" />
                   </div>
                 </div>
               </motion.article>
@@ -231,17 +236,17 @@ export default function FeaturedPets() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            className="mx-auto mt-14 max-w-2xl rounded-[2.25rem] border border-white/60 bg-white/56 p-10 text-center shadow-[0_24px_80px_rgba(47,32,23,0.10)] backdrop-blur-2xl"
+            className="mx-auto mt-14 max-w-2xl rounded-[2.25rem] border border-[#3A241A]/10 bg-[#FFF9EF]/64 p-10 text-center shadow-[0_24px_80px_rgba(58,36,26,0.10)] backdrop-blur-2xl"
           >
             <PawPrint
               aria-hidden="true"
-              className="mx-auto h-10 w-10 text-[#D59A3A]"
+              className="mx-auto h-10 w-10 text-[#B77932]"
               strokeWidth={1.8}
             />
-            <p className="mt-5 font-[Poppins] text-2xl font-bold text-[#2F2017]">
+            <p className="mt-5 font-[Poppins] text-2xl font-bold text-[#2A1B14]">
               Featured pets unavailable
             </p>
-            <p className="mx-auto mt-3 max-w-md text-base leading-7 text-[#5B4A3F]">
+            <p className="mx-auto mt-3 max-w-md text-base leading-7 text-[#5E4A3D]">
               {error}
             </p>
           </motion.div>
@@ -251,17 +256,17 @@ export default function FeaturedPets() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            className="mx-auto mt-14 max-w-2xl rounded-[2.25rem] border border-white/60 bg-white/56 p-10 text-center shadow-[0_24px_80px_rgba(47,32,23,0.10)] backdrop-blur-2xl"
+            className="mx-auto mt-14 max-w-2xl rounded-[2.25rem] border border-[#3A241A]/10 bg-[#FFF9EF]/64 p-10 text-center shadow-[0_24px_80px_rgba(58,36,26,0.10)] backdrop-blur-2xl"
           >
             <PawPrint
               aria-hidden="true"
-              className="mx-auto h-10 w-10 text-[#D59A3A]"
+              className="mx-auto h-10 w-10 text-[#B77932]"
               strokeWidth={1.8}
             />
-            <p className="mt-5 font-[Poppins] text-2xl font-bold text-[#2F2017]">
+            <p className="mt-5 font-[Poppins] text-2xl font-bold text-[#2A1B14]">
               No featured pets available.
             </p>
-            <p className="mx-auto mt-3 max-w-md text-base leading-7 text-[#5B4A3F]">
+            <p className="mx-auto mt-3 max-w-md text-base leading-7 text-[#5E4A3D]">
               Please check back soon to meet our lovely pets.
             </p>
           </motion.div>
@@ -287,19 +292,19 @@ export default function FeaturedPets() {
                   variants={cardVariants}
                   whileHover={{ y: -8 }}
                   transition={{ type: "spring", stiffness: 320, damping: 24 }}
-                  className="group relative overflow-hidden rounded-[2.25rem] border border-white/60 bg-white/52 p-2 shadow-[0_24px_80px_rgba(47,32,23,0.10)] backdrop-blur-2xl transition duration-300 hover:border-[#D59A3A]/45 hover:bg-white/64 hover:shadow-[0_30px_96px_rgba(47,32,23,0.14)]"
+                  className="group relative overflow-hidden rounded-[2.25rem] border border-[#3A241A]/10 bg-[#FFF9EF]/64 p-2 shadow-[0_24px_80px_rgba(58,36,26,0.10)] backdrop-blur-2xl transition duration-300 hover:border-[#B77932]/32 hover:bg-[#FFF9EF]/78 hover:shadow-[0_30px_96px_rgba(58,36,26,0.14)]"
                 >
                   <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/95 to-transparent" />
-                  <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-[#D59A3A]/10 blur-3xl" />
+                  <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-[#C99045]/10 blur-3xl" />
 
-                  <div className="relative aspect-[5/4] overflow-hidden rounded-[1.8rem] bg-[#FFF8F0]">
+                  <div className="relative aspect-[5/4] overflow-hidden rounded-[1.8rem] bg-[#FFF4E4]">
                     <img
                       src={imageSrc}
                       alt={`${pet.name}, ${pet.breed}`}
                       loading="lazy"
                       className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105"
                     />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2F2017]/34 via-transparent to-white/8" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2A1B14]/40 via-[#2A1B14]/5 to-white/8" />
 
                     <div className="absolute left-4 top-4">
                       <span
@@ -313,16 +318,16 @@ export default function FeaturedPets() {
                     </div>
 
                     <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
-                      <div className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/58 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[#D59A3A] shadow-lg shadow-[#2F2017]/5 backdrop-blur-2xl">
+                      <div className="inline-flex items-center gap-2 rounded-full border border-white/64 bg-[#FFF9EF]/72 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[#8D5B26] shadow-lg shadow-[#2A1B14]/5 backdrop-blur-2xl">
                         <CategoryIcon
                           aria-hidden="true"
-                          className="h-4 w-4"
+                          className="h-4 w-4 text-[#B77932]"
                           strokeWidth={2}
                         />
                         <span>{pet.category}</span>
                       </div>
 
-                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/60 bg-white/58 text-[#D59A3A] shadow-lg shadow-[#2F2017]/5 backdrop-blur-2xl">
+                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/64 bg-[#FFF9EF]/72 text-[#B77932] shadow-lg shadow-[#2A1B14]/5 backdrop-blur-2xl">
                         <BadgeCheck
                           aria-hidden="true"
                           className="h-5 w-5"
@@ -333,31 +338,52 @@ export default function FeaturedPets() {
                   </div>
 
                   <div className="relative p-5 sm:p-6">
-                    <h3 className="font-[Poppins] text-2xl font-bold tracking-tight text-[#2F2017]">
-                      {pet.name}
-                    </h3>
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="min-w-0">
+                        <p className="text-[11px] font-bold uppercase leading-none tracking-[0.18em] text-[#9A6429]/82">
+                          Companion
+                        </p>
+                        <h3 className="mt-2 truncate font-[Poppins] text-2xl font-bold leading-tight tracking-tight text-[#2A1B14]">
+                          {pet.name}
+                        </h3>
+                      </div>
 
-                    <p className="mt-2 text-sm font-bold text-[#5B4A3F]">
-                      {pet.breed} • {pet.category}
+                      <Heart
+                        aria-hidden="true"
+                        className="mt-1 h-5 w-5 shrink-0 text-[#B77932]/72"
+                        strokeWidth={1.9}
+                      />
+                    </div>
+
+                    <p className="mt-2 truncate text-sm font-bold leading-5 text-[#6A4B35]">
+                      {pet.breed}
+                      <span className="mx-2 text-[#C99045]/70">/</span>
+                      <span className="font-semibold text-[#6A4B35]/78">
+                        {pet.category}
+                      </span>
                     </p>
 
                     {pet.description ? (
-                      <p className="mt-4 line-clamp-2 text-sm leading-6 text-[#5B4A3F]">
+                      <p className="mt-4 line-clamp-2 rounded-2xl border border-[#3A241A]/8 bg-[#FFF4E4]/46 px-3 py-2.5 text-sm leading-6 text-[#5E4A3D]/88">
                         {pet.description}
                       </p>
                     ) : null}
 
-                    <dl className="mt-5 grid gap-3 text-sm">
-                      <div className="flex items-center justify-between gap-4 border-b border-[#ECECEC] pb-3">
-                        <dt className="font-medium text-[#5B4A3F]/80">Age</dt>
-                        <dd className="text-right font-bold text-[#2F2017]">
+                    <dl className="mt-5 grid overflow-hidden rounded-2xl border border-[#3A241A]/8 bg-white/32 text-sm">
+                      <div className="flex items-center justify-between gap-4 border-b border-[#3A241A]/8 px-3 py-2.5">
+                        <dt className="font-semibold uppercase tracking-[0.12em] text-[#7A6253]/74">
+                          Age
+                        </dt>
+                        <dd className="text-right font-bold text-[#2A1B14]">
                           {pet.age ?? ""}
                         </dd>
                       </div>
 
-                      <div className="flex items-center justify-between gap-4">
-                        <dt className="font-medium text-[#5B4A3F]/80">Price</dt>
-                        <dd className="text-right font-[Poppins] text-lg font-bold text-[#D59A3A]">
+                      <div className="flex items-center justify-between gap-4 px-3 py-2.5">
+                        <dt className="font-semibold uppercase tracking-[0.12em] text-[#7A6253]/74">
+                          Price
+                        </dt>
+                        <dd className="text-right font-[Poppins] text-lg font-bold text-[#9A6429]">
                           {formatPrice(pet.price)}
                         </dd>
                       </div>
@@ -366,11 +392,11 @@ export default function FeaturedPets() {
                     <div className="mt-6 grid grid-cols-2 gap-3">
                       <a
                         href={`tel:${settings.phone}`}
-                        className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[#D59A3A]/70 bg-white/72 px-4 text-sm font-bold text-[#D59A3A] shadow-xl shadow-[#2F2017]/5 outline-none backdrop-blur-2xl transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-2xl hover:shadow-[#D59A3A]/15 focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]"
+                        className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[#B77932]/45 bg-[#FFF9EF]/76 px-4 text-sm font-bold text-[#8D5B26] shadow-xl shadow-[#2A1B14]/5 outline-none backdrop-blur-2xl transition duration-300 hover:-translate-y-0.5 hover:bg-[#FFF4E4] hover:shadow-2xl hover:shadow-[#B77932]/14 focus-visible:ring-2 focus-visible:ring-[#C99045] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF9EF]"
                       >
                         <Phone
                           aria-hidden="true"
-                          className="h-4 w-4 text-[#D59A3A]"
+                          className="h-4 w-4 text-[#B77932]"
                           strokeWidth={2.2}
                         />
                         <span>Call Now</span>
@@ -378,7 +404,7 @@ export default function FeaturedPets() {
 
                       <a
                         href={whatsappHref}
-                        className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] px-4 text-sm font-bold text-white shadow-xl shadow-emerald-900/15 outline-none transition duration-300 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-emerald-900/20 focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]"
+                        className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#1F9F5C] to-[#128C7E] px-4 text-sm font-bold text-white shadow-xl shadow-emerald-900/15 outline-none transition duration-300 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-emerald-900/20 focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF9EF]"
                       >
                         <MessageCircle
                           aria-hidden="true"

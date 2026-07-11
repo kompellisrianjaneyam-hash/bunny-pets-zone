@@ -170,7 +170,7 @@ export default function Navbar() {
 
           <motion.div
             variants={itemVariants}
-            className="hidden items-center justify-center gap-1 rounded-full border border-white/60 bg-white/42 p-1.5 shadow-inner shadow-white/60 backdrop-blur-2xl lg:flex"
+            className="hidden items-center justify-center gap-3 rounded-full border border-white/60 bg-white/42 p-1.5 shadow-inner shadow-white/60 backdrop-blur-2xl lg:flex"
           >
             {navLinks.map((link) => {
               const isActive = isActivePath(pathname, link.href);
@@ -180,7 +180,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   aria-current={isActive ? "page" : undefined}
-                    className={classNames(
+                  className={classNames(
                     "group relative inline-flex h-10 items-center justify-center rounded-full px-5 font-[Inter] text-[13px] font-bold tracking-tight outline-none transition duration-300 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]",
                     isActive
                       ? "bg-[#D59A3A]/13 text-[#D59A3A] shadow-lg shadow-[#D59A3A]/10"
