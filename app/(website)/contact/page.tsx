@@ -13,9 +13,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import FloatingActions from "@/components/layout/FloatingActions";
 import Container from "@/components/layout/Container";
 import Button from "@/components/ui/Button";
 
@@ -24,8 +21,8 @@ const settings = {
   phone: "7680904157",
   whatsapp: "7680904157",
   address: "Kondapur, Hyderabad",
-  businessHours: "10:00 AM – 10:00 PM",
-  workingDays: "Monday – Sunday",
+  businessHours: "10:00 AM - 10:00 PM",
+  workingDays: "Monday - Sunday",
   googleMaps:
     "https://www.google.com/maps/search/?api=1&query=Bunny+Pets+Zone+Kondapur+Hyderabad",
 };
@@ -119,9 +116,7 @@ const cardVariants: Variants = {
 export default function ContactPage() {
   return (
     <main className="min-h-screen bg-[#FFF8F0] font-[Inter]">
-      <Navbar />
-
-      <section className="relative isolate overflow-hidden bg-[#FFF8F0] px-4 pb-20 pt-36 sm:px-6 sm:pb-24 sm:pt-40 lg:px-8 lg:pb-28 lg:pt-44">
+      <section className="relative isolate overflow-hidden bg-[#FFF8F0] px-4 pb-16 pt-36 sm:px-6 sm:pb-20 sm:pt-40 lg:px-8 lg:pb-24 lg:pt-44">
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(213,154,58,0.15),transparent_30%),radial-gradient(circle_at_86%_24%,rgba(255,214,153,0.32),transparent_28%),linear-gradient(180deg,#FFF8F0_0%,#FFF3E6_52%,#FFF8F0_100%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(rgba(213,154,58,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(213,154,58,0.04)_1px,transparent_1px)] bg-[size:52px_52px] [mask-image:radial-gradient(ellipse_at_center,black_0%,transparent_72%)]" />
@@ -165,24 +160,22 @@ export default function ContactPage() {
 
       <section className="relative bg-[#FFF8F0] px-4 pb-24 sm:px-6 sm:pb-28 lg:px-8 lg:pb-32">
         <Container>
-          <div className="grid items-start gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10">
+          <div className="grid items-stretch gap-8 lg:grid-cols-[0.86fr_1.14fr] lg:gap-10">
             <motion.article
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.25 }}
-              whileHover={{ y: -6 }}
-              transition={{ type: "spring", stiffness: 320, damping: 26 }}
               aria-labelledby="contact-info-heading"
-              className="relative overflow-hidden rounded-[2.25rem] border border-[#ECECEC] bg-white/58 p-6 shadow-[0_26px_80px_rgba(47,32,23,0.10)] backdrop-blur-2xl sm:p-8 lg:p-10"
+              className="relative overflow-hidden rounded-[2.25rem] border border-[#ECECEC] bg-white/58 p-5 shadow-[0_26px_80px_rgba(47,32,23,0.10)] backdrop-blur-2xl sm:p-6 lg:p-7"
             >
               <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#D59A3A]/12 blur-3xl" />
               <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-orange-200/38 blur-3xl" />
 
               <div className="relative z-10">
-                <div className="flex items-start justify-between gap-6">
+                <div className="flex items-start justify-between gap-5">
                   <div>
-                    <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#D59A3A]">
+                    <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#D59A3A]">
                       Store Details
                     </p>
                     <h2
@@ -202,12 +195,12 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="mt-8 grid gap-4">
+                <div className="mt-7 grid gap-3">
                   {contactItems.map((item) => {
                     const Icon = item.icon;
                     const content = (
-                      <span className="flex gap-4">
-                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#D59A3A]/12 text-[#D59A3A]">
+                      <span className="flex items-center gap-4">
+                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#D59A3A]/12 text-[#D59A3A] shadow-sm">
                           <Icon
                             aria-hidden="true"
                             className="h-6 w-6"
@@ -219,12 +212,15 @@ export default function ContactPage() {
                           <span className="block text-sm font-semibold text-[#5B4A3F]">
                             {item.label}
                           </span>
-                          <span className="mt-1 block break-words font-[Poppins] text-lg font-bold text-[#2F2017]">
+                          <span className="mt-1 block break-words font-[Poppins] text-xl font-bold leading-tight text-[#2F2017]">
                             {item.value}
                           </span>
                         </span>
                       </span>
                     );
+
+                    const className =
+                      "rounded-[1.45rem] border border-[#ECECEC] bg-white/64 px-4 py-4 shadow-lg shadow-[#2F2017]/5 outline-none backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-[#D59A3A]/45 focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]";
 
                     return item.href ? (
                       <Link
@@ -238,22 +234,19 @@ export default function ContactPage() {
                             ? "noopener noreferrer"
                             : undefined
                         }
-                        className="rounded-3xl border border-[#ECECEC] bg-white/54 p-5 shadow-lg shadow-[#2F2017]/5 outline-none backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-[#D59A3A]/45 focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]"
+                        className={className}
                       >
                         {content}
                       </Link>
                     ) : (
-                      <div
-                        key={item.label}
-                        className="rounded-3xl border border-[#ECECEC] bg-white/54 p-5 shadow-lg shadow-[#2F2017]/5 backdrop-blur-xl"
-                      >
+                      <div key={item.label} className={className}>
                         {content}
                       </div>
                     );
                   })}
                 </div>
 
-                <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                <div className="mt-6 grid gap-3 sm:grid-cols-3">
                   <div className="[&_a]:h-13 [&_a]:w-full [&_a]:rounded-full [&_a]:px-4 [&_a]:text-sm [&_a]:font-bold">
                     <Button href={whatsappHref}>
                       <span className="inline-flex items-center gap-2">
@@ -262,7 +255,7 @@ export default function ContactPage() {
                           className="h-4 w-4"
                           strokeWidth={2}
                         />
-                        Chat on WhatsApp
+                        Chat
                       </span>
                     </Button>
                   </div>
@@ -275,7 +268,7 @@ export default function ContactPage() {
                           className="h-4 w-4"
                           strokeWidth={2}
                         />
-                        Call Now
+                        Call
                       </span>
                     </Button>
                   </div>
@@ -285,9 +278,9 @@ export default function ContactPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="View Bunny Pets Zone on Google Maps"
-                    className="inline-flex h-13 items-center justify-center gap-2 rounded-full border border-[#ECECEC] bg-white/58 px-4 text-sm font-bold text-[#2F2017] shadow-xl shadow-[#2F2017]/5 outline-none backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-[#D59A3A]/45 hover:text-[#D59A3A] focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]"
+                    className="inline-flex h-13 items-center justify-center gap-2 rounded-full border border-[#ECECEC] bg-white/64 px-4 text-sm font-bold text-[#2F2017] shadow-xl shadow-[#2F2017]/5 outline-none backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-[#D59A3A]/45 hover:text-[#D59A3A] focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]"
                   >
-                    View on Google Maps
+                    Maps
                     <ArrowUpRight
                       aria-hidden="true"
                       className="h-4 w-4"
@@ -316,7 +309,7 @@ export default function ContactPage() {
                   src={mapEmbedUrl}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="h-[420px] w-full border-0 sm:h-[520px] lg:h-[680px]"
+                  className="h-[420px] w-full border-0 sm:h-[520px] lg:h-[650px]"
                   aria-label={`${settings.businessName} map showing ${settings.address}`}
                 />
               </div>
@@ -369,9 +362,6 @@ export default function ContactPage() {
           </motion.section>
         </Container>
       </section>
-
-      <Footer />
-      <FloatingActions />
     </main>
   );
 }
