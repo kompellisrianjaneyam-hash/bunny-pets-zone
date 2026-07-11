@@ -118,7 +118,7 @@ export default function Navbar() {
       variants={navbarVariants}
       initial="hidden"
       animate="visible"
-      className="fixed left-0 right-0 top-0 z-50"
+      className="sticky left-0 right-0 top-0 z-50"
     >
       <motion.nav
         variants={itemVariants}

@@ -8,7 +8,7 @@ export default function WebsiteLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="min-h-screen bg-[#FFF8F0]">
       <Navbar />
 
       <main>{children}</main>
@@ -16,6 +16,6 @@ export default function WebsiteLayout({
       <Footer />
 
       <FloatingActions />
-    </>
+    </div>
   );
 }
