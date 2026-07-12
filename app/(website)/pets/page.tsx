@@ -267,7 +267,7 @@ export default function PetsPage() {
         </div>
       </section>
 
-      <section className="relative w-full bg-[#FFF9EF] pb-28 sm:pb-32 lg:pb-36">
+      <section className="relative w-full bg-[#FFF9EF] pb-20 sm:pb-24 lg:pb-28">
         <div className="mx-auto w-full max-w-[1180px] px-5 sm:px-8 lg:px-10">
           <motion.div
             variants={containerVariants}
@@ -354,42 +354,40 @@ export default function PetsPage() {
               animate="visible"
               className="mx-auto mt-20 flex w-full flex-wrap items-stretch justify-center gap-8"
             >
-              {Array.from({ length: 3 }).map(
-                (_, index) => (
-                  <motion.article
-                    key={index}
-                    variants={cardVariants}
-                    className="w-full max-w-[360px] overflow-hidden rounded-[2rem] border border-[#3A241A]/10 bg-[#FFF9EF]/72 shadow-[0_20px_55px_rgba(58,36,26,0.08)] backdrop-blur-xl"
-                  >
-                    <div className="aspect-[4/3] overflow-hidden bg-[#FFF4E4]">
-                      <div className="h-full w-full animate-pulse bg-[#B77932]/10" />
+              {Array.from({ length: 3 }).map((_, index) => (
+                <motion.article
+                  key={index}
+                  variants={cardVariants}
+                  className="w-full max-w-[360px] overflow-hidden rounded-[2rem] border border-[#3A241A]/10 bg-[#FFF9EF]/72 shadow-[0_20px_55px_rgba(58,36,26,0.08)] backdrop-blur-xl"
+                >
+                  <div className="aspect-[4/3] overflow-hidden bg-[#FFF4E4]">
+                    <div className="h-full w-full animate-pulse bg-[#B77932]/10" />
+                  </div>
+
+                  <div className="p-7">
+                    <div className="mx-auto h-8 w-32 animate-pulse rounded-full bg-[#B77932]/10" />
+
+                    <div className="mx-auto mt-6 h-8 w-4/5 animate-pulse rounded-full bg-[#B77932]/10" />
+
+                    <div className="mx-auto mt-7 w-full overflow-hidden rounded-[1.35rem] border border-[#3A241A]/[0.07] bg-[#FFFCF7]/70 px-5 sm:px-6">
+                      {Array.from({ length: 4 }).map(
+                        (_, rowIndex) => (
+                          <div
+                            key={rowIndex}
+                            className="flex min-h-[68px] items-center justify-between gap-5 border-b border-[#3A241A]/[0.08] py-5 last:border-b-0"
+                          >
+                            <div className="h-4 w-16 animate-pulse rounded-full bg-[#B77932]/10" />
+
+                            <div className="h-4 w-24 animate-pulse rounded-full bg-[#B77932]/10" />
+                          </div>
+                        ),
+                      )}
                     </div>
 
-                    <div className="p-7">
-                      <div className="mx-auto h-8 w-32 animate-pulse rounded-full bg-[#B77932]/10" />
-
-                      <div className="mx-auto mt-6 h-8 w-4/5 animate-pulse rounded-full bg-[#B77932]/10" />
-
-                      <div className="mt-7 space-y-4">
-                        {Array.from({ length: 4 }).map(
-                          (_, rowIndex) => (
-                            <div
-                              key={rowIndex}
-                              className="flex min-h-[44px] items-center justify-between gap-6 border-b border-[#3A241A]/10 pb-4"
-                            >
-                              <div className="h-4 w-16 animate-pulse rounded-full bg-[#B77932]/10" />
-
-                              <div className="h-4 w-24 animate-pulse rounded-full bg-[#B77932]/10" />
-                            </div>
-                          ),
-                        )}
-                      </div>
-
-                      <div className="mt-7 min-h-[56px] w-full animate-pulse rounded-full bg-[#B77932]/10" />
-                    </div>
-                  </motion.article>
-                ),
-              )}
+                    <div className="mt-7 min-h-[56px] w-full animate-pulse rounded-full bg-[#B77932]/10" />
+                  </div>
+                </motion.article>
+              ))}
             </motion.div>
           ) : error ? (
             <EmptyState
@@ -501,7 +499,7 @@ export default function PetsPage() {
                         </p>
                       ) : null}
 
-                      <dl className="mt-7 space-y-1">
+                      <dl className="mx-auto mt-7 w-full overflow-hidden rounded-[1.35rem] border border-[#3A241A]/[0.07] bg-[#FFFCF7]/70 px-5 sm:px-6">
                         <PetDetailRow
                           label="Breed"
                           value={pet.breed}
@@ -517,12 +515,12 @@ export default function PetsPage() {
                           value={pet.age ?? ""}
                         />
 
-                        <div className="flex min-h-[58px] items-center justify-between gap-6 pt-4">
-                          <dt className="shrink-0 text-sm font-medium text-[#5E4A3D]/80">
+                        <div className="flex min-h-[68px] w-full items-center justify-between gap-5 py-5">
+                          <dt className="shrink-0 text-left text-sm font-medium text-[#5E4A3D]/80">
                             Price
                           </dt>
 
-                          <dd className="break-words text-right font-[Poppins] text-lg font-bold leading-6 text-[#B77932]">
+                          <dd className="min-w-0 max-w-[65%] break-words text-right font-[Poppins] text-lg font-bold leading-6 text-[#B77932]">
                             {formatPrice(pet.price)}
                           </dd>
                         </div>
@@ -539,37 +537,6 @@ export default function PetsPage() {
               })}
             </motion.div>
           )}
-
-          <motion.div
-            variants={fadeUpVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{
-              once: true,
-              amount: 0.25,
-            }}
-            className="mx-auto mt-24 flex w-full max-w-[900px] flex-col items-center justify-center overflow-hidden rounded-[2.25rem] border border-[#3A241A]/10 bg-[#FFF9EF]/72 px-8 py-14 text-center shadow-[0_26px_80px_rgba(58,36,26,0.10)] backdrop-blur-2xl sm:px-12 sm:py-16 lg:px-16"
-          >
-            <h2 className="mx-auto w-full max-w-[760px] text-center font-[Poppins] text-3xl font-bold leading-[1.2] tracking-[-0.03em] text-[#2A1B14] sm:text-4xl">
-              Need help choosing the right pet?
-            </h2>
-
-            <p className="mx-auto mt-6 w-full max-w-[680px] text-center text-base leading-8 text-[#5E4A3D] sm:text-lg sm:leading-9">
-              Message Bunny Pets Zone on WhatsApp and our team will guide you
-              with availability, care details and the best match for your
-              family.
-            </p>
-
-            <div className="mx-auto mt-9 flex w-full items-center justify-center [&_a]:inline-flex [&_a]:min-h-[56px] [&_a]:items-center [&_a]:justify-center [&_a]:rounded-full [&_a]:px-9 [&_a]:py-4 [&_a]:text-center [&_a]:text-base [&_a]:font-bold [&_a]:leading-none">
-              <Button
-                href={`https://wa.me/91${businessWhatsapp}?text=${encodeURIComponent(
-                  "Hi Bunny Pets Zone,\nI'm looking for a pet. Could you please help me choose the right companion?",
-                )}`}
-              >
-                Chat on WhatsApp
-              </Button>
-            </div>
-          </motion.div>
         </div>
       </section>
     </main>
@@ -584,12 +551,12 @@ function PetDetailRow({
   value: string;
 }) {
   return (
-    <div className="flex min-h-[58px] items-center justify-between gap-6 border-b border-[#3A241A]/10 py-4">
-      <dt className="shrink-0 text-sm font-medium text-[#5E4A3D]/80">
+    <div className="flex min-h-[68px] w-full items-center justify-between gap-5 border-b border-[#3A241A]/[0.08] py-5">
+      <dt className="shrink-0 text-left text-sm font-medium text-[#5E4A3D]/80">
         {label}
       </dt>
 
-      <dd className="min-w-0 break-words text-right text-sm font-bold leading-6 text-[#2A1B14]">
+      <dd className="min-w-0 max-w-[65%] break-words text-right text-sm font-bold leading-6 text-[#2A1B14]">
         {value}
       </dd>
     </div>
