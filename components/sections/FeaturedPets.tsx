@@ -3,6 +3,7 @@
 import { motion, type Variants } from "framer-motion";
 import {
   BadgeCheck,
+  CalendarDays,
   Cat,
   Dog,
   Feather,
@@ -37,11 +38,10 @@ const statusLabels: Record<Pet["status"], string> = {
 
 const statusStyles: Record<Pet["status"], string> = {
   available:
-    "border-emerald-700/15 bg-emerald-50/88 text-emerald-800 shadow-emerald-950/5",
-  sold_out:
-    "border-red-700/15 bg-red-50/88 text-red-800 shadow-red-950/5",
+    "border-emerald-700/15 bg-emerald-50/90 text-emerald-800",
+  sold_out: "border-red-700/15 bg-red-50/90 text-red-800",
   coming_soon:
-    "border-amber-700/15 bg-amber-50/88 text-amber-800 shadow-amber-950/5",
+    "border-amber-700/15 bg-amber-50/90 text-amber-800",
 };
 
 const containerVariants: Variants = {
@@ -169,23 +169,21 @@ export default function FeaturedPets() {
         >
           <motion.div
             variants={fadeUpVariants}
-            className="mx-auto inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-[#3A241A]/10 bg-[#FFF9EF]/70 px-4 py-2 text-center text-[10px] font-bold uppercase tracking-[0.13em] text-[#8D5B26] shadow-lg shadow-[#3A241A]/5 sm:text-xs sm:tracking-[0.18em]"
+            className="mx-auto inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-[#3A241A]/10 bg-[#FFF9EF]/70 px-4 py-2 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-[#B77932] sm:text-xs sm:tracking-[0.24em]"
           >
             <Sparkles
               aria-hidden="true"
-              className="h-4 w-4 shrink-0 text-[#B77932]"
-              strokeWidth={2}
+              className="h-4 w-4 shrink-0"
+              strokeWidth={1.8}
             />
 
-            <span className="text-center">
-              Meet Your New Best Friend
-            </span>
+            <span>Meet Your New Best Friend</span>
           </motion.div>
 
           <motion.h2
             id="featured-pets-heading"
             variants={fadeUpVariants}
-            className="mx-auto mt-7 w-full max-w-[800px] text-center font-[Poppins] text-[2.6rem] font-bold leading-[1.12] tracking-[-0.035em] text-[#2A1B14] sm:mt-8 sm:text-5xl sm:leading-[1.15] lg:text-[3.6rem] lg:leading-[1.12]"
+            className="mx-auto mt-7 w-full text-center font-[Poppins] text-4xl font-bold leading-[1.12] tracking-[-0.04em] text-[#2A1B14] sm:text-5xl lg:text-[3.7rem]"
           >
             Featured Pets
           </motion.h2>
@@ -193,7 +191,7 @@ export default function FeaturedPets() {
           <motion.div
             variants={fadeUpVariants}
             aria-hidden="true"
-            className="mx-auto mt-6 flex w-full items-center justify-center gap-3 sm:mt-8"
+            className="mx-auto mt-7 flex w-full items-center justify-center gap-3"
           >
             <span className="h-px w-12 bg-[#C99045]/55" />
 
@@ -207,7 +205,7 @@ export default function FeaturedPets() {
 
           <motion.p
             variants={fadeUpVariants}
-            className="mx-auto mt-6 w-full max-w-[700px] px-1 text-center text-base leading-8 text-[#5E4A3D] sm:mt-8 sm:px-0 sm:text-lg sm:leading-9"
+            className="mx-auto mt-7 max-w-[680px] text-center text-base leading-8 text-[#5B4A3F] sm:text-lg sm:leading-9"
           >
             Discover loving companions waiting to become part of your family.
           </motion.p>
@@ -217,40 +215,34 @@ export default function FeaturedPets() {
           <motion.div
             variants={containerVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.14 }}
-            className="mx-auto mt-16 grid w-full max-w-[1120px] grid-cols-1 justify-items-center gap-8 md:grid-cols-2 lg:mt-24 lg:grid-cols-3 lg:gap-10"
+            animate="visible"
+            className="mx-auto mt-20 flex w-full flex-wrap items-stretch justify-center gap-8"
           >
             {Array.from({ length: 3 }).map((_, index) => (
               <motion.article
                 key={index}
                 variants={cardVariants}
-                className="relative w-full max-w-[360px] overflow-hidden rounded-[1.75rem] border border-[#3A241A]/[0.07] bg-[#FFFEFB] p-2 shadow-[0_18px_48px_rgba(58,36,26,0.065)]"
+                className="w-full max-w-[410px] overflow-hidden rounded-[2rem] border border-[#3A241A]/10 bg-[#FFF9EF]/72 shadow-[0_20px_55px_rgba(58,36,26,0.08)] backdrop-blur-xl"
               >
-                <div className="aspect-[5/4] animate-pulse rounded-[1.4rem] bg-[#B77932]/10" />
+                <div className="aspect-[4/3] animate-pulse bg-[#B77932]/10" />
 
-                <div className="p-5">
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="h-8 w-28 animate-pulse rounded-full bg-[#B77932]/10" />
+                <div className="p-6 sm:p-7">
+                  <div className="h-9 w-36 animate-pulse rounded-full bg-[#B77932]/10" />
 
-                    <div className="h-8 w-8 animate-pulse rounded-full bg-[#B77932]/10" />
+                  <div className="mt-6 h-8 w-3/4 animate-pulse rounded-full bg-[#B77932]/10" />
+
+                  <div className="mt-4 h-5 w-2/3 animate-pulse rounded-full bg-[#B77932]/10" />
+
+                  <div className="mt-8 space-y-3">
+                    {Array.from({ length: 4 }).map((__, rowIndex) => (
+                      <div
+                        key={rowIndex}
+                        className="h-16 w-full animate-pulse rounded-2xl bg-[#B77932]/10"
+                      />
+                    ))}
                   </div>
 
-                  <div className="mt-5 h-8 w-4/5 animate-pulse rounded-full bg-[#B77932]/10" />
-
-                  <div className="mt-4 h-12 w-full animate-pulse rounded-2xl bg-[#B77932]/10" />
-
-                  <div className="mt-5 grid gap-3">
-                    <div className="h-4 w-full animate-pulse rounded-full bg-[#B77932]/10" />
-
-                    <div className="h-4 w-4/5 animate-pulse rounded-full bg-[#B77932]/10" />
-                  </div>
-
-                  <div className="mt-6 grid grid-cols-2 gap-3">
-                    <div className="h-12 animate-pulse rounded-full bg-[#B77932]/10" />
-
-                    <div className="h-12 animate-pulse rounded-full bg-[#B77932]/10" />
-                  </div>
+                  <div className="mt-7 h-14 w-full animate-pulse rounded-full bg-[#B77932]/10" />
                 </div>
               </motion.article>
             ))}
@@ -259,21 +251,14 @@ export default function FeaturedPets() {
           <motion.div
             variants={fadeUpVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            className="mx-auto mt-16 w-full max-w-2xl rounded-[1.75rem] border border-[#3A241A]/[0.07] bg-[#FFFEFB] p-8 text-center shadow-[0_18px_48px_rgba(58,36,26,0.065)] sm:mt-20 sm:p-10"
+            animate="visible"
+            className="mx-auto mt-20 max-w-[720px] rounded-[2rem] border border-[#3A241A]/10 bg-[#FFF9EF]/75 px-6 py-12 text-center shadow-[0_20px_55px_rgba(58,36,26,0.08)]"
           >
-            <PawPrint
-              aria-hidden="true"
-              className="mx-auto h-10 w-10 text-[#B77932]"
-              strokeWidth={1.8}
-            />
+            <h3 className="font-[Poppins] text-2xl font-bold text-[#2A1B14]">
+              Something went wrong
+            </h3>
 
-            <p className="mx-auto mt-5 text-center font-[Poppins] text-2xl font-bold text-[#2A1B14]">
-              Featured pets unavailable
-            </p>
-
-            <p className="mx-auto mt-3 max-w-md text-center text-base leading-7 text-[#5E4A3D]">
+            <p className="mt-4 text-base leading-8 text-[#5B4A3F]">
               {error}
             </p>
           </motion.div>
@@ -281,72 +266,60 @@ export default function FeaturedPets() {
           <motion.div
             variants={fadeUpVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            className="mx-auto mt-16 w-full max-w-2xl rounded-[1.75rem] border border-[#3A241A]/[0.07] bg-[#FFFEFB] p-8 text-center shadow-[0_18px_48px_rgba(58,36,26,0.065)] sm:mt-20 sm:p-10"
+            animate="visible"
+            className="mx-auto mt-20 max-w-[720px] rounded-[2rem] border border-[#3A241A]/10 bg-[#FFF9EF]/75 px-6 py-12 text-center shadow-[0_20px_55px_rgba(58,36,26,0.08)]"
           >
-            <PawPrint
-              aria-hidden="true"
-              className="mx-auto h-10 w-10 text-[#B77932]"
-              strokeWidth={1.8}
-            />
+            <h3 className="font-[Poppins] text-2xl font-bold text-[#2A1B14]">
+              No pets available.
+            </h3>
 
-            <p className="mx-auto mt-5 text-center font-[Poppins] text-2xl font-bold text-[#2A1B14]">
-              No featured pets available.
-            </p>
-
-            <p className="mx-auto mt-3 max-w-md text-center text-base leading-7 text-[#5E4A3D]">
-              Please check back soon to meet our lovely pets.
+            <p className="mt-4 text-base leading-8 text-[#5B4A3F]">
+              Please check back soon to find your perfect companion.
             </p>
           </motion.div>
         ) : (
           <motion.div
             variants={containerVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.14 }}
-            className="mx-auto mt-16 grid w-full max-w-[1120px] grid-cols-1 justify-items-center gap-8 md:grid-cols-2 lg:mt-24 lg:grid-cols-3 lg:gap-10"
+            animate="visible"
+            className="mx-auto mt-20 flex w-full flex-wrap items-stretch justify-center gap-8"
           >
             {pets.map((pet) => {
-              const CategoryIcon =
-                categoryIcons[pet.category] ?? PawPrint;
+              const CategoryIcon = categoryIcons[pet.category];
 
               const imageSrc =
                 pet.images?.[0] ?? "/images/pet-placeholder.jpg";
 
-              const whatsappMessage = `Hi Bunny Pets Zone, I'm interested in ${pet.name}`;
+              const whatsappMessage = encodeURIComponent(
+                `Hi Bunny Pets Zone, I'm interested in ${pet.name}. Could you please share more information?`,
+              );
 
-              const whatsappHref = `https://wa.me/91${
-                settings.whatsapp
-              }?text=${encodeURIComponent(whatsappMessage)}`;
+              const whatsappHref = `https://wa.me/91${settings.whatsapp}?text=${whatsappMessage}`;
 
               return (
                 <motion.article
                   key={pet.id}
                   variants={cardVariants}
-                  whileHover={{ y: -5 }}
+                  whileHover={{ y: -6 }}
                   transition={{
                     type: "spring",
-                    stiffness: 300,
+                    stiffness: 320,
                     damping: 24,
                   }}
-                  className="group relative w-full max-w-[360px] overflow-hidden rounded-[1.75rem] border border-[#3A241A]/[0.07] bg-[#FFFEFB] p-2 shadow-[0_18px_48px_rgba(58,36,26,0.065)] transition duration-300 hover:border-[#B77932]/25 hover:shadow-[0_24px_64px_rgba(58,36,26,0.10)]"
+                  className="group relative flex w-full max-w-[410px] flex-col overflow-hidden rounded-[2rem] border border-[#3A241A]/10 bg-[#FFF9EF]/78 shadow-[0_20px_55px_rgba(58,36,26,0.08)] backdrop-blur-xl transition duration-300 hover:border-[#C99045]/45 hover:shadow-[0_28px_70px_rgba(58,36,26,0.12)]"
                 >
-                  <div className="relative aspect-[5/4] overflow-hidden rounded-[1.4rem] bg-[#FFF4E4]">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-[#FFF4E4]">
                     <img
                       src={imageSrc}
-                      alt={`${pet.name}, ${pet.breed}`}
+                      alt={pet.name}
                       loading="lazy"
-                      decoding="async"
-                      className="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
+                      className="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-105"
                     />
 
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2A1B14]/40 via-[#2A1B14]/5 to-transparent" />
-
-                    <div className="absolute left-4 top-4">
+                    <div className="absolute left-5 top-5">
                       <span
                         className={[
-                          "inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-bold shadow-lg",
+                          "inline-flex min-h-[36px] items-center justify-center rounded-full border px-4 py-2 text-center text-xs font-bold leading-none shadow-lg backdrop-blur-xl",
                           statusStyles[pet.status],
                         ].join(" ")}
                       >
@@ -354,95 +327,144 @@ export default function FeaturedPets() {
                       </span>
                     </div>
 
-                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
-                      <div className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-[#FFF9EF]/90 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[#8D5B26] shadow-lg">
+                    <div className="absolute bottom-5 left-5">
+                      <div className="inline-flex min-h-[38px] items-center justify-center gap-2 rounded-full border border-[#C99045]/30 bg-[#FFF9EF]/95 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-[#9A6429] shadow-lg backdrop-blur-xl">
                         <CategoryIcon
                           aria-hidden="true"
-                          className="h-4 w-4 text-[#B77932]"
+                          className="h-4 w-4 shrink-0"
                           strokeWidth={2}
                         />
 
                         <span>{pet.category}</span>
                       </div>
-
-                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/60 bg-[#FFF9EF]/90 text-[#B77932] shadow-lg">
-                        <BadgeCheck
-                          aria-hidden="true"
-                          className="h-5 w-5"
-                          strokeWidth={2}
-                        />
-                      </span>
                     </div>
+
+                    {pet.featured_homepage ? (
+                      <div className="absolute bottom-5 right-5">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#C99045]/25 bg-[#FFF9EF]/95 text-[#B77932] shadow-lg backdrop-blur-xl">
+                          <BadgeCheck
+                            aria-hidden="true"
+                            className="h-5 w-5"
+                            strokeWidth={2}
+                          />
+                        </div>
+                      </div>
+                    ) : null}
                   </div>
 
-                  <div className="relative p-5 sm:p-6">
+                  <div className="flex flex-1 flex-col p-6 sm:p-7">
                     <div className="flex items-start justify-between gap-4">
-                      <div className="min-w-0">
-                        <p className="text-[11px] font-bold uppercase leading-none tracking-[0.18em] text-[#9A6429]/82">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#B77932]">
                           Companion
                         </p>
 
-                        <h3 className="mt-2 truncate font-[Poppins] text-2xl font-bold leading-tight tracking-tight text-[#2A1B14]">
+                        <h3 className="mt-2 break-words font-[Poppins] text-2xl font-bold leading-tight tracking-[-0.025em] text-[#2A1B14]">
                           {pet.name}
                         </h3>
                       </div>
 
                       <Heart
                         aria-hidden="true"
-                        className="mt-1 h-5 w-5 shrink-0 text-[#B77932]/72"
-                        strokeWidth={1.9}
+                        className="mt-1 h-6 w-6 shrink-0 text-[#C99045]"
+                        strokeWidth={1.8}
                       />
                     </div>
 
-                    <p className="mt-2 truncate text-sm font-bold leading-5 text-[#6A4B35]">
+                    <p className="mt-3 break-words text-base font-semibold leading-7 text-[#5B4A3F]">
                       {pet.breed}
-
-                      <span className="mx-2 text-[#C99045]/70">
-                        /
-                      </span>
-
-                      <span className="font-semibold text-[#6A4B35]/78">
-                        {pet.category}
-                      </span>
+                      {pet.pet_type ? `/${pet.pet_type}` : ""}
                     </p>
 
                     {pet.description ? (
-                      <p className="mt-4 line-clamp-2 rounded-2xl border border-[#3A241A]/8 bg-[#FFF4E4]/46 px-3 py-2.5 text-sm leading-6 text-[#5E4A3D]/88">
+                      <p className="mt-3 break-words text-sm leading-7 text-[#5B4A3F]">
                         {pet.description}
                       </p>
                     ) : null}
 
-                    <dl className="mt-5 grid overflow-hidden rounded-2xl border border-[#3A241A]/8 bg-white/32 text-sm">
-                      <div className="flex items-center justify-between gap-4 border-b border-[#3A241A]/8 px-3 py-2.5">
-                        <dt className="font-semibold uppercase tracking-[0.12em] text-[#7A6253]/74">
-                          Age
+                    <dl className="mt-7 overflow-hidden rounded-[1.4rem] border border-[#C99045]/25 bg-[#FFFDF9]">
+                      <div className="grid min-h-[64px] grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-center gap-4 border-b border-[#3A241A]/10 px-5 py-4 sm:px-6">
+                        <dt className="flex min-w-0 items-center gap-3 text-sm font-semibold text-[#A76519]">
+                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#FFF4E4]">
+                            <PawPrint
+                              className="h-4 w-4"
+                              strokeWidth={1.9}
+                            />
+                          </span>
+
+                          <span>Breed</span>
                         </dt>
 
-                        <dd className="text-right font-bold text-[#2A1B14]">
-                          {pet.age ?? ""}
+                        <dd className="min-w-0 text-right text-sm font-bold leading-5 text-[#2A1B14]">
+                          <span className="ml-auto block max-w-[155px] break-words pr-1">
+                            {pet.breed}
+                          </span>
                         </dd>
                       </div>
 
-                      <div className="flex items-center justify-between gap-4 px-3 py-2.5">
-                        <dt className="font-semibold uppercase tracking-[0.12em] text-[#7A6253]/74">
-                          Price
+                      <div className="grid min-h-[64px] grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-center gap-4 border-b border-[#3A241A]/10 px-5 py-4 sm:px-6">
+                        <dt className="flex min-w-0 items-center gap-3 text-sm font-semibold text-[#A76519]">
+                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#FFF4E4]">
+                            <CategoryIcon
+                              className="h-4 w-4"
+                              strokeWidth={1.9}
+                            />
+                          </span>
+
+                          <span>Type</span>
                         </dt>
 
-                        <dd className="text-right font-[Poppins] text-lg font-bold text-[#9A6429]">
-                          {formatPrice(pet.price)}
+                        <dd className="min-w-0 text-right text-sm font-bold leading-5 text-[#2A1B14]">
+                          <span className="ml-auto block max-w-[155px] break-words pr-1">
+                            {pet.pet_type || pet.category}
+                          </span>
+                        </dd>
+                      </div>
+
+                      <div className="grid min-h-[64px] grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-center gap-4 border-b border-[#3A241A]/10 px-5 py-4 sm:px-6">
+                        <dt className="flex min-w-0 items-center gap-3 text-sm font-semibold text-[#A76519]">
+                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#FFF4E4]">
+                            <CalendarDays
+                              className="h-4 w-4"
+                              strokeWidth={1.9}
+                            />
+                          </span>
+
+                          <span>Age</span>
+                        </dt>
+
+                        <dd className="min-w-0 text-right text-sm font-bold leading-5 text-[#2A1B14]">
+                          <span className="ml-auto block max-w-[155px] break-words pr-1">
+                            {pet.age || "Not specified"}
+                          </span>
+                        </dd>
+                      </div>
+
+                      <div className="grid min-h-[68px] grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-center gap-4 px-5 py-4 sm:px-6">
+                        <dt className="flex min-w-0 items-center gap-3 text-sm font-semibold text-[#A76519]">
+                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#FFF4E4] text-base font-bold">
+                            ₹
+                          </span>
+
+                          <span>Price</span>
+                        </dt>
+
+                        <dd className="min-w-0 text-right font-[Poppins] text-lg font-bold leading-6 text-[#A76519]">
+                          <span className="ml-auto block max-w-[165px] break-words pr-1">
+                            {formatPrice(pet.price)}
+                          </span>
                         </dd>
                       </div>
                     </dl>
 
-                    <div className="mt-6 grid grid-cols-2 gap-3">
+                    <div className="mt-7 grid grid-cols-1 gap-3 min-[390px]:grid-cols-2">
                       <a
                         href={`tel:${settings.phone}`}
-                        className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[#B77932]/45 bg-[#FFF9EF] px-3 text-sm font-bold text-[#8D5B26] shadow-lg outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#FFF4E4] focus-visible:ring-2 focus-visible:ring-[#C99045] focus-visible:ring-offset-4 sm:px-4"
+                        className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full border border-[#B77932]/45 bg-[#FFF9EF] px-4 py-3 text-center text-sm font-bold text-[#8D5B26] shadow-lg transition duration-300 hover:-translate-y-0.5 hover:bg-[#FFF4E4]"
                       >
                         <Phone
-                          aria-hidden="true"
-                          className="h-4 w-4 shrink-0 text-[#B77932]"
-                          strokeWidth={2.2}
+                          className="h-5 w-5 shrink-0 text-[#B77932]"
+                          strokeWidth={2}
                         />
 
                         <span>Call Now</span>
@@ -450,12 +472,13 @@ export default function FeaturedPets() {
 
                       <a
                         href={whatsappHref}
-                        className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#1F9F5C] to-[#128C7E] px-3 text-sm font-bold text-white shadow-lg shadow-emerald-900/15 outline-none transition duration-300 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-4 sm:px-4"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#0AA66A] px-4 py-3 text-center text-sm font-bold text-white shadow-lg transition duration-300 hover:-translate-y-0.5 hover:bg-[#078C59]"
                       >
                         <MessageCircle
-                          aria-hidden="true"
-                          className="h-4 w-4 shrink-0 text-white"
-                          strokeWidth={2.2}
+                          className="h-5 w-5 shrink-0"
+                          strokeWidth={2}
                         />
 
                         <span>WhatsApp</span>
@@ -472,10 +495,12 @@ export default function FeaturedPets() {
           variants={fadeUpVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
-          className="mx-auto mt-16 flex w-full max-w-[1120px] items-center justify-center pb-4 text-center sm:mt-20 [&_a]:h-14 [&_a]:rounded-full [&_a]:px-8 [&_a]:text-base [&_a]:font-bold"
+          viewport={{ once: true, amount: 0.25 }}
+          className="mx-auto mt-16 flex w-full items-center justify-center"
         >
-          <Button href="/pets">View All Pets</Button>
+          <div className="[&_a]:inline-flex [&_a]:min-h-[56px] [&_a]:items-center [&_a]:justify-center [&_a]:rounded-full [&_a]:px-8 [&_a]:py-4 [&_a]:text-center [&_a]:text-sm [&_a]:font-bold">
+            <Button href="/pets">View All Pets</Button>
+          </div>
         </motion.div>
       </div>
     </section>
