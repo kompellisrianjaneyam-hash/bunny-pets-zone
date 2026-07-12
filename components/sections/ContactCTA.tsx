@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 
 import Container from "@/components/layout/Container";
-import Button from "@/components/ui/Button";
 
 const settings = {
   businessName: "Bunny Pets Zone",
@@ -27,24 +26,20 @@ const phoneHref = `tel:${settings.phone}`;
 
 const contactItems = [
   {
-    label: "Phone Number",
+    label: "Phone",
     value: settings.phone,
-    icon: Phone,
   },
   {
     label: "WhatsApp",
     value: settings.whatsapp,
-    icon: MessageCircle,
   },
   {
-    label: "Address",
+    label: "Location",
     value: settings.address,
-    icon: MapPin,
   },
   {
-    label: "Business Hours",
+    label: "Hours",
     value: settings.businessHours,
-    icon: Clock3,
   },
 ];
 
@@ -98,10 +93,9 @@ export default function ContactCTA() {
       className="relative isolate overflow-hidden bg-[#FFF8F0] px-4 py-24 font-[Inter] sm:px-6 sm:py-28 lg:px-8 lg:py-32"
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(213,154,58,0.14),transparent_30%),radial-gradient(circle_at_84%_22%,rgba(255,214,153,0.30),transparent_28%),linear-gradient(180deg,#FFF8F0_0%,#FFF3E6_52%,#FFF8F0_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(213,154,58,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(213,154,58,0.04)_1px,transparent_1px)] bg-[size:52px_52px] [mask-image:radial-gradient(ellipse_at_center,black_0%,transparent_72%)]" />
-        <div className="absolute -left-28 top-20 h-80 w-80 rounded-full bg-[#D59A3A]/10 blur-3xl" />
-        <div className="absolute -right-28 bottom-10 h-96 w-96 rounded-full bg-orange-200/42 blur-3xl" />
+        <div className="absolute inset-0 bg-[#FFF9EF]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_22%,rgba(247,235,221,0.72),transparent_34%),radial-gradient(circle_at_86%_20%,rgba(201,144,69,0.09),transparent_30%),linear-gradient(180deg,#FFF9EF_0%,#FFF4E4_56%,#F7EBDD_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-[#3A241A]/10" />
       </div>
 
       <Container>
@@ -115,54 +109,60 @@ export default function ContactCTA() {
           >
             <motion.div
               variants={fadeUpVariants}
-              className="inline-flex items-center gap-2 rounded-full border border-[#ECECEC] bg-white/50 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D59A3A] shadow-lg shadow-[#D59A3A]/5 backdrop-blur-xl"
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#8D5B26]"
             >
-              <Sparkles aria-hidden="true" className="h-4 w-4" strokeWidth={2} />
+              <Sparkles
+                aria-hidden="true"
+                className="h-4 w-4 text-[#B77932]"
+                strokeWidth={2}
+              />
               <span>Contact Us</span>
             </motion.div>
 
             <motion.h2
               id="contact-cta-heading"
               variants={fadeUpVariants}
-              className="mt-7 text-balance font-[Poppins] text-4xl font-bold leading-tight tracking-tight text-[#2F2017] sm:text-5xl lg:text-6xl"
+              className="mt-7 text-balance font-[Poppins] text-4xl font-bold leading-[1.12] tracking-tight text-[#2A1B14] sm:text-5xl lg:text-6xl"
             >
-              Ready to Meet Your New Best Friend?
+              Ready to Meet Your
+              <span className="block">New Best Friend?</span>
             </motion.h2>
 
             <motion.p
               variants={fadeUpVariants}
-              className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-8 text-[#5B4A3F] sm:text-xl lg:mx-0"
+              className="mx-auto mt-6 max-w-xl text-pretty text-lg leading-8 text-[#5E4A3D] sm:text-xl lg:mx-0"
             >
-              Visit {settings.businessName} in {settings.address} or contact us
-              on WhatsApp to know about available pets. Our team is always happy
-              to help you choose the perfect companion.
+              Visit us in Kondapur or get in touch to check current pet
+              availability.
             </motion.p>
 
             <motion.div
               variants={fadeUpVariants}
-              className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start [&_a]:h-14 [&_a]:rounded-full [&_a]:px-8 [&_a]:text-base [&_a]:font-bold"
+              className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start"
             >
-              <Button href={whatsappHref}>
-                <span className="inline-flex items-center gap-2">
-                  <MessageCircle
-                    aria-hidden="true"
-                    className="h-5 w-5"
-                    strokeWidth={2}
-                  />
-                  Chat on WhatsApp
-                </span>
-              </Button>
+              <a
+                href={whatsappHref}
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-[#2A1B14]/10 bg-[#2A1B14] px-8 text-base font-bold text-[#FFF9EF] shadow-[0_18px_42px_rgba(42,27,20,0.18)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#3A241A] focus-visible:ring-2 focus-visible:ring-[#B77932] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF9EF]"
+              >
+                <MessageCircle
+                  aria-hidden="true"
+                  className="h-5 w-5"
+                  strokeWidth={2}
+                />
+                <span>Chat on WhatsApp</span>
+              </a>
 
-              <Button href={phoneHref} variant="secondary">
-                <span className="inline-flex items-center gap-2">
-                  <Phone
-                    aria-hidden="true"
-                    className="h-5 w-5"
-                    strokeWidth={2}
-                  />
-                  Call Now
-                </span>
-              </Button>
+              <a
+                href={phoneHref}
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-[#3A241A]/14 bg-[#FFF9EF]/58 px-8 text-base font-bold text-[#2A1B14] shadow-[0_12px_30px_rgba(58,36,26,0.06)] outline-none transition duration-300 hover:-translate-y-0.5 hover:border-[#B77932]/36 hover:text-[#8D5B26] focus-visible:ring-2 focus-visible:ring-[#B77932] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF9EF]"
+              >
+                <Phone
+                  aria-hidden="true"
+                  className="h-5 w-5 text-[#8D5B26]"
+                  strokeWidth={2}
+                />
+                <span>Call Now</span>
+              </a>
             </motion.div>
           </motion.div>
 
@@ -171,74 +171,64 @@ export default function ContactCTA() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.25 }}
-            whileHover={{ y: -6 }}
             transition={{ type: "spring", stiffness: 320, damping: 26 }}
             aria-label={`${settings.businessName} contact information`}
-            className="relative overflow-hidden rounded-[2.25rem] border border-[#ECECEC] bg-white/58 p-6 shadow-[0_26px_80px_rgba(47,32,23,0.10)] backdrop-blur-2xl sm:p-8 lg:p-10"
+            className="relative overflow-hidden rounded-[2.25rem] border border-[#3A241A]/10 bg-[#FFF9EF]/72 p-6 shadow-[0_26px_80px_rgba(58,36,26,0.10)] sm:p-8 lg:p-10"
           >
-            <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#D59A3A]/12 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-orange-200/38 blur-3xl" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_0%,rgba(201,144,69,0.10),transparent_34%),linear-gradient(145deg,rgba(255,249,239,0.92),rgba(247,235,221,0.42))]" />
+            <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/90 to-transparent" />
 
             <div className="relative z-10">
-              <div className="flex items-start justify-between gap-6">
-                <div>
-                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#D59A3A]">
+              <div className="flex items-start gap-5">
+                <MapPin
+                  aria-hidden="true"
+                  className="mt-1 h-7 w-7 shrink-0 text-[#9A6429]"
+                  strokeWidth={1.8}
+                />
+
+                <div className="min-w-0">
+                  <p className="text-sm font-bold uppercase leading-none tracking-[0.18em] text-[#8D5B26]">
                     Visit Us
                   </p>
-                  <h3 className="mt-3 font-[Poppins] text-3xl font-bold tracking-tight text-[#2F2017] sm:text-4xl">
+                  <h3 className="mt-3 font-[Poppins] text-3xl font-bold leading-tight tracking-tight text-[#2A1B14] sm:text-4xl">
                     {settings.businessName}
                   </h3>
                 </div>
-
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-3xl bg-[#D59A3A]/12 text-[#D59A3A] shadow-lg shadow-[#D59A3A]/10">
-                  <MapPin aria-hidden="true" className="h-7 w-7" strokeWidth={1.8} />
-                </div>
               </div>
 
-              <div className="mt-8 grid gap-4">
-                {contactItems.map((item) => {
-                  const Icon = item.icon;
+              <dl className="mt-9 grid gap-x-8 gap-y-0 border-y border-[#3A241A]/10 sm:grid-cols-2">
+                {contactItems.map((item, index) => (
+                  <div
+                    key={item.label}
+                    className={[
+                      "min-w-0 py-5",
+                      index < 2 ? "border-b border-[#3A241A]/10" : "",
+                      index % 2 === 0 ? "sm:pr-6" : "sm:border-l sm:border-[#3A241A]/10 sm:pl-6",
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
+                  >
+                    <dt className="text-[11px] font-bold uppercase leading-none tracking-[0.18em] text-[#8D5B26]/86">
+                      {item.label}
+                    </dt>
+                    <dd className="mt-2 break-words font-[Poppins] text-base font-bold leading-7 text-[#2A1B14] sm:text-lg">
+                      {item.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
 
-                  return (
-                    <div
-                      key={item.label}
-                      className="rounded-3xl border border-[#ECECEC] bg-white/54 p-5 shadow-lg shadow-[#2F2017]/5 backdrop-blur-xl"
-                    >
-                      <div className="flex gap-4">
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#D59A3A]/12 text-[#D59A3A]">
-                          <Icon
-                            aria-hidden="true"
-                            className="h-6 w-6"
-                            strokeWidth={1.8}
-                          />
-                        </div>
-
-                        <div className="min-w-0">
-                          <p className="text-sm font-semibold text-[#5B4A3F]">
-                            {item.label}
-                          </p>
-                          <p className="mt-1 break-words font-[Poppins] text-lg font-bold text-[#2F2017]">
-                            {item.value}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <div className="mt-8 [&_a]:h-14 [&_a]:w-full [&_a]:rounded-full [&_a]:text-base [&_a]:font-bold">
-                <Button href={settings.googleMaps} variant="secondary">
-                  <span className="inline-flex items-center gap-2">
-                    View on Google Maps
-                    <ArrowUpRight
-                      aria-hidden="true"
-                      className="h-5 w-5"
-                      strokeWidth={2}
-                    />
-                  </span>
-                </Button>
-              </div>
+              <a
+                href={settings.googleMaps}
+                className="group mt-7 inline-flex items-center gap-2 text-sm font-bold text-[#2A1B14] outline-none transition duration-300 hover:text-[#8D5B26] focus-visible:ring-2 focus-visible:ring-[#B77932] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF9EF]"
+              >
+                <span>View on Google Maps</span>
+                <ArrowUpRight
+                  aria-hidden="true"
+                  className="h-4 w-4 text-[#9A6429] transition duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  strokeWidth={2}
+                />
+              </a>
             </div>
           </motion.aside>
         </div>

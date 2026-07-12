@@ -1,4 +1,3 @@
-
 "use client";
 
 import { motion, type Variants } from "framer-motion";
@@ -15,7 +14,6 @@ import {
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
-import Container from "@/components/layout/Container";
 import Button from "@/components/ui/Button";
 import { getAllPets, type Pet } from "@/lib/pets";
 
@@ -23,14 +21,37 @@ type FilterCategory = "All" | "Dog" | "Cat" | "Bird" | "Hamster";
 
 const businessWhatsapp = "7680904157";
 
-const filters: { label: string; value: FilterCategory; icon: typeof PawPrint }[] =
-  [
-    { label: "All", value: "All", icon: PawPrint },
-    { label: "Dogs", value: "Dog", icon: Dog },
-    { label: "Cats", value: "Cat", icon: Cat },
-    { label: "Birds", value: "Bird", icon: Bird },
-    { label: "Hamsters", value: "Hamster", icon: Ham },
-  ];
+const filters: {
+  label: string;
+  value: FilterCategory;
+  icon: typeof PawPrint;
+}[] = [
+  {
+    label: "All Pets",
+    value: "All",
+    icon: PawPrint,
+  },
+  {
+    label: "Dogs",
+    value: "Dog",
+    icon: Dog,
+  },
+  {
+    label: "Cats",
+    value: "Cat",
+    icon: Cat,
+  },
+  {
+    label: "Birds",
+    value: "Bird",
+    icon: Bird,
+  },
+  {
+    label: "Hamsters",
+    value: "Hamster",
+    icon: Ham,
+  },
+];
 
 const statusLabels: Record<Pet["status"], string> = {
   available: "Available",
@@ -39,11 +60,9 @@ const statusLabels: Record<Pet["status"], string> = {
 };
 
 const statusStyles: Record<Pet["status"], string> = {
-  available:
-    "border-emerald-200 bg-emerald-50 text-emerald-700 shadow-emerald-900/5",
-  sold_out: "border-red-200 bg-red-50 text-red-700 shadow-red-900/5",
-  coming_soon:
-    "border-amber-200 bg-amber-50 text-amber-700 shadow-amber-900/5",
+  available: "border-emerald-200 bg-emerald-50 text-emerald-700",
+  sold_out: "border-red-200 bg-red-50 text-red-700",
+  coming_soon: "border-amber-200 bg-amber-50 text-amber-700",
 };
 
 const categoryIcons: Record<Pet["category"], typeof PawPrint> = {
@@ -57,8 +76,8 @@ const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.06,
+      staggerChildren: 0.07,
+      delayChildren: 0.04,
     },
   },
 };
@@ -66,13 +85,13 @@ const containerVariants: Variants = {
 const fadeUpVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 24,
+    y: 18,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.62,
+      duration: 0.52,
       ease: [0.22, 1, 0.36, 1],
     },
   },
@@ -81,15 +100,15 @@ const fadeUpVariants: Variants = {
 const cardVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 30,
-    scale: 0.97,
+    y: 24,
+    scale: 0.98,
   },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.58,
+      duration: 0.54,
       ease: [0.22, 1, 0.36, 1],
     },
   },
@@ -125,15 +144,19 @@ ${pet.age ?? ""}
 
 Could you please share more information?`;
 
-  return `https://wa.me/91${businessWhatsapp}?text=${encodeURIComponent(message)}`;
+  return `https://wa.me/91${businessWhatsapp}?text=${encodeURIComponent(
+    message,
+  )}`;
 }
 
 export default function PetsPage() {
   const [pets, setPets] = useState<Pet[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
   const [selectedCategory, setSelectedCategory] =
     useState<FilterCategory>("All");
+
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -147,7 +170,11 @@ export default function PetsPage() {
         const data = await getAllPets();
 
         if (isMounted) {
-          setPets((data ?? []).filter((pet) => pet.show_on_website === true));
+          setPets(
+            (data ?? []).filter(
+              (pet) => pet.show_on_website === true,
+            ),
+          );
         }
       } catch (err) {
         console.error("Error loading pets:", err);
@@ -175,7 +202,8 @@ export default function PetsPage() {
 
     return pets.filter((pet) => {
       const matchesCategory =
-        selectedCategory === "All" || pet.category === selectedCategory;
+        selectedCategory === "All" ||
+        pet.category === selectedCategory;
 
       const matchesSearch =
         query.length === 0 ||
@@ -189,109 +217,131 @@ export default function PetsPage() {
   }, [pets, searchQuery, selectedCategory]);
 
   return (
-    <main className="min-h-screen bg-[#FFF8F0] font-[Inter]">
-      <section className="relative isolate overflow-hidden bg-[#FFF8F0] px-4 pb-20 pt-36 sm:px-6 sm:pb-24 sm:pt-40 lg:px-8 lg:pb-28 lg:pt-44">
+    <main className="min-h-screen w-full overflow-x-hidden bg-[#FFF9EF] font-[Inter]">
+      <section className="relative isolate w-full overflow-hidden bg-[#FFF9EF] py-20 sm:py-24 lg:py-28">
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(213,154,58,0.15),transparent_30%),radial-gradient(circle_at_86%_24%,rgba(255,214,153,0.32),transparent_28%),linear-gradient(180deg,#FFF8F0_0%,#FFF3E6_52%,#FFF8F0_100%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(213,154,58,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(213,154,58,0.04)_1px,transparent_1px)] bg-[size:52px_52px] [mask-image:radial-gradient(ellipse_at_center,black_0%,transparent_72%)]" />
-          <div className="absolute -left-28 top-20 h-80 w-80 rounded-full bg-[#D59A3A]/10 blur-3xl" />
-          <div className="absolute -right-28 top-36 h-96 w-96 rounded-full bg-orange-200/42 blur-3xl" />
+          <div className="absolute inset-0 bg-[#FFF9EF]" />
+
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(201,144,69,0.15),transparent_30%),radial-gradient(circle_at_86%_24%,rgba(247,235,221,0.8),transparent_30%),linear-gradient(180deg,#FFF9EF_0%,#FFF4E4_52%,#FFF9EF_100%)]" />
+
+          <div className="absolute -left-28 top-20 h-80 w-80 rounded-full bg-[#B77932]/10 blur-3xl" />
+
+          <div className="absolute -right-28 top-36 h-96 w-96 rounded-full bg-[#C99045]/14 blur-3xl" />
         </div>
 
-        <Container>
+        <div className="mx-auto w-full max-w-[1180px] px-5 sm:px-8 lg:px-10">
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="mx-auto max-w-3xl text-center"
+            className="mx-auto flex w-full flex-col items-center justify-center text-center"
           >
             <motion.div
               variants={fadeUpVariants}
-              className="inline-flex items-center gap-2 rounded-full border border-[#ECECEC] bg-white/50 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D59A3A] shadow-lg shadow-[#D59A3A]/5 backdrop-blur-xl"
+              className="mx-auto inline-flex items-center justify-center gap-2 rounded-full border border-[#3A241A]/10 bg-[#FFF9EF]/75 px-5 py-2.5 text-center text-xs font-bold uppercase tracking-[0.18em] text-[#9A6429] shadow-[0_10px_30px_rgba(58,36,26,0.06)] backdrop-blur-xl"
             >
-              <Sparkles aria-hidden="true" className="h-4 w-4" strokeWidth={2} />
+              <Sparkles
+                aria-hidden="true"
+                className="h-4 w-4 shrink-0 text-[#B77932]"
+                strokeWidth={2}
+              />
+
               <span>Our Pets</span>
             </motion.div>
 
             <motion.h1
               variants={fadeUpVariants}
-              className="mt-7 text-balance font-[Poppins] text-5xl font-bold leading-tight tracking-tight text-[#2F2017] sm:text-6xl lg:text-7xl"
+              className="mx-auto mt-8 w-full max-w-[1000px] text-center font-[Poppins] text-[2.7rem] font-bold leading-[1.08] tracking-[-0.04em] text-[#2A1B14] sm:text-[3.7rem] lg:text-[4.3rem]"
             >
               Find Your Perfect Companion
             </motion.h1>
 
             <motion.p
               variants={fadeUpVariants}
-              className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-8 text-[#5B4A3F] sm:text-xl"
+              className="mx-auto mt-6 w-full max-w-[760px] text-center text-base font-medium leading-8 text-[#5E4A3D] sm:text-lg sm:leading-9"
             >
-              Browse our healthy and well-cared-for pets. Contact us directly on
-              WhatsApp for availability and more information.
+              Browse our healthy and well-cared-for pets. Contact us directly
+              on WhatsApp for availability and more information.
             </motion.p>
           </motion.div>
-        </Container>
+        </div>
       </section>
 
-      <section
-        aria-labelledby="pets-list-heading"
-        className="relative bg-[#FFF8F0] px-4 pb-24 sm:px-6 sm:pb-28 lg:px-8 lg:pb-32"
-      >
-        <Container>
-          <h2 id="pets-list-heading" className="sr-only">
-            Available pets list
-          </h2>
-
+      <section className="relative w-full bg-[#FFF9EF] pb-28 sm:pb-32 lg:pb-36">
+        <div className="mx-auto w-full max-w-[1180px] px-5 sm:px-8 lg:px-10">
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="space-y-6"
+            className="mx-auto flex w-full flex-col items-center justify-center text-center"
           >
             <motion.div
               variants={fadeUpVariants}
-              className="flex flex-wrap justify-center gap-3"
               aria-label="Filter pets by category"
+              className="mx-auto flex w-full max-w-[900px] flex-wrap items-center justify-center gap-4"
             >
               {filters.map((filter) => {
                 const Icon = filter.icon;
-                const isActive = selectedCategory === filter.value;
+
+                const isActive =
+                  selectedCategory === filter.value;
 
                 return (
                   <button
                     key={filter.value}
                     type="button"
-                    onClick={() => setSelectedCategory(filter.value)}
+                    onClick={() =>
+                      setSelectedCategory(filter.value)
+                    }
                     aria-pressed={isActive}
                     className={[
-                      "relative inline-flex h-12 items-center gap-2 rounded-full border px-5 text-sm font-bold outline-none transition duration-300 focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]",
+                      "inline-flex min-h-[58px] min-w-[140px] items-center justify-center gap-3 rounded-full border px-7 py-4 text-center text-sm font-bold leading-none outline-none transition duration-300",
                       isActive
-                        ? "border-[#D59A3A] bg-[#D59A3A] text-white shadow-xl shadow-[#D59A3A]/20"
-                        : "border-[#ECECEC] bg-white/58 text-[#2F2017] shadow-lg shadow-[#2F2017]/5 backdrop-blur-xl hover:-translate-y-0.5 hover:border-[#D59A3A]/45 hover:text-[#D59A3A]",
+                        ? "border-[#C99045] bg-gradient-to-r from-[#8A5522] via-[#C99045] to-[#A86424] text-white shadow-[0_16px_38px_rgba(138,85,34,0.24)]"
+                        : "border-[#3A241A]/10 bg-[#FFF9EF]/72 text-[#2A1B14] shadow-[0_12px_30px_rgba(58,36,26,0.06)] backdrop-blur-xl hover:-translate-y-0.5 hover:border-[#C99045]/45 hover:text-[#9A6429]",
                     ].join(" ")}
                   >
-                    <Icon aria-hidden="true" className="h-4 w-4" strokeWidth={2} />
-                    <span>{filter.label}</span>
+                    <Icon
+                      aria-hidden="true"
+                      className="h-5 w-5 shrink-0"
+                      strokeWidth={2}
+                    />
+
+                    <span className="whitespace-nowrap">
+                      {filter.label}
+                    </span>
                   </button>
                 );
               })}
             </motion.div>
 
-            <motion.div variants={fadeUpVariants} className="mx-auto max-w-2xl">
-              <label htmlFor="pet-search" className="sr-only">
+            <motion.div
+              variants={fadeUpVariants}
+              className="mx-auto mt-8 w-full max-w-[820px]"
+            >
+              <label
+                htmlFor="pet-search"
+                className="sr-only"
+              >
                 Search pets
               </label>
-              <div className="relative">
+
+              <div className="relative w-full">
                 <Search
                   aria-hidden="true"
-                  className="pointer-events-none absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-[#D59A3A]"
+                  className="pointer-events-none absolute left-6 top-1/2 h-5 w-5 -translate-y-1/2 text-[#B77932]"
                   strokeWidth={2}
                 />
+
                 <input
                   id="pet-search"
                   type="search"
                   value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
+                  onChange={(event) =>
+                    setSearchQuery(event.target.value)
+                  }
                   placeholder="Search pets..."
-                  className="h-16 w-full rounded-full border border-[#ECECEC] bg-white/62 pl-14 pr-6 text-base font-semibold text-[#2F2017] shadow-xl shadow-[#2F2017]/5 outline-none backdrop-blur-xl transition duration-300 placeholder:text-[#5B4A3F]/50 focus:border-[#D59A3A] focus:ring-2 focus:ring-[#D59A3A]/20"
+                  className="min-h-[64px] w-full rounded-full border border-[#3A241A]/10 bg-[#FFF9EF]/72 py-4 pl-16 pr-7 text-base font-semibold leading-6 text-[#2A1B14] shadow-[0_16px_42px_rgba(58,36,26,0.07)] outline-none backdrop-blur-xl transition duration-300 placeholder:text-[#5E4A3D]/50 focus:border-[#C99045] focus:ring-2 focus:ring-[#C99045]/20"
                 />
               </div>
             </motion.div>
@@ -302,234 +352,215 @@ export default function PetsPage() {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+              className="mx-auto mt-20 flex w-full flex-wrap items-stretch justify-center gap-8"
             >
-              {Array.from({ length: 8 }).map((_, index) => (
-                <motion.article
-                  key={index}
-                  variants={cardVariants}
-                  className="group relative overflow-hidden rounded-[2rem] border border-[#ECECEC] bg-white/72 shadow-xl shadow-[#2F2017]/5 backdrop-blur-xl transition-colors duration-300 hover:border-[#D59A3A]"
-                >
-                  <div className="relative aspect-square overflow-hidden bg-[#FFF8F0]">
-                    <div className="h-full w-full animate-pulse bg-[#D59A3A]/10" />
-                  </div>
-
-                  <div className="relative z-20 p-6">
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="h-8 w-28 animate-pulse rounded-full bg-[#D59A3A]/10" />
-                      <div className="h-5 w-5 animate-pulse rounded-full bg-[#D59A3A]/10" />
+              {Array.from({ length: 3 }).map(
+                (_, index) => (
+                  <motion.article
+                    key={index}
+                    variants={cardVariants}
+                    className="w-full max-w-[360px] overflow-hidden rounded-[2rem] border border-[#3A241A]/10 bg-[#FFF9EF]/72 shadow-[0_20px_55px_rgba(58,36,26,0.08)] backdrop-blur-xl"
+                  >
+                    <div className="aspect-[4/3] overflow-hidden bg-[#FFF4E4]">
+                      <div className="h-full w-full animate-pulse bg-[#B77932]/10" />
                     </div>
 
-                    <div className="mt-5 h-8 w-4/5 animate-pulse rounded-full bg-[#D59A3A]/10" />
+                    <div className="p-7">
+                      <div className="mx-auto h-8 w-32 animate-pulse rounded-full bg-[#B77932]/10" />
 
-                    <div className="mt-5 grid gap-3 text-sm">
-                      <div className="flex items-center justify-between gap-4 border-b border-[#ECECEC] pb-3">
-                        <div className="h-4 w-14 animate-pulse rounded-full bg-[#D59A3A]/10" />
-                        <div className="h-4 w-20 animate-pulse rounded-full bg-[#D59A3A]/10" />
+                      <div className="mx-auto mt-6 h-8 w-4/5 animate-pulse rounded-full bg-[#B77932]/10" />
+
+                      <div className="mt-7 space-y-4">
+                        {Array.from({ length: 4 }).map(
+                          (_, rowIndex) => (
+                            <div
+                              key={rowIndex}
+                              className="flex min-h-[44px] items-center justify-between gap-6 border-b border-[#3A241A]/10 pb-4"
+                            >
+                              <div className="h-4 w-16 animate-pulse rounded-full bg-[#B77932]/10" />
+
+                              <div className="h-4 w-24 animate-pulse rounded-full bg-[#B77932]/10" />
+                            </div>
+                          ),
+                        )}
                       </div>
 
-                      <div className="flex items-center justify-between gap-4 border-b border-[#ECECEC] pb-3">
-                        <div className="h-4 w-12 animate-pulse rounded-full bg-[#D59A3A]/10" />
-                        <div className="h-4 w-24 animate-pulse rounded-full bg-[#D59A3A]/10" />
-                      </div>
-
-                      <div className="flex items-center justify-between gap-4 border-b border-[#ECECEC] pb-3">
-                        <div className="h-4 w-10 animate-pulse rounded-full bg-[#D59A3A]/10" />
-                        <div className="h-4 w-16 animate-pulse rounded-full bg-[#D59A3A]/10" />
-                      </div>
-
-                      <div className="flex items-center justify-between gap-4">
-                        <div className="h-4 w-12 animate-pulse rounded-full bg-[#D59A3A]/10" />
-                        <div className="h-6 w-24 animate-pulse rounded-full bg-[#D59A3A]/10" />
-                      </div>
+                      <div className="mt-7 min-h-[56px] w-full animate-pulse rounded-full bg-[#B77932]/10" />
                     </div>
-
-                    <div className="relative z-30 mt-6 h-12 w-full animate-pulse rounded-full bg-[#D59A3A]/10" />
-                  </div>
-                </motion.article>
-              ))}
+                  </motion.article>
+                ),
+              )}
             </motion.div>
           ) : error ? (
-            <div className="mt-14 rounded-[2rem] border border-[#ECECEC] bg-white/58 p-10 text-center shadow-xl shadow-[#2F2017]/5 backdrop-blur-xl">
-              <PawPrint
-                aria-hidden="true"
-                className="mx-auto h-10 w-10 text-[#D59A3A]"
-                strokeWidth={1.8}
-              />
-              <p className="mt-5 font-[Poppins] text-2xl font-bold text-[#2F2017]">
-                Something went wrong
-              </p>
-              <p className="mx-auto mt-3 max-w-md text-base leading-7 text-[#5B4A3F]">
-                {error}
-              </p>
-            </div>
+            <EmptyState
+              title="Something went wrong"
+              description={error}
+            />
           ) : pets.length === 0 ? (
-            <div className="mt-14 rounded-[2rem] border border-[#ECECEC] bg-white/58 p-10 text-center shadow-xl shadow-[#2F2017]/5 backdrop-blur-xl">
-              <PawPrint
-                aria-hidden="true"
-                className="mx-auto h-10 w-10 text-[#D59A3A]"
-                strokeWidth={1.8}
-              />
-              <p className="mt-5 font-[Poppins] text-2xl font-bold text-[#2F2017]">
-                No pets available.
-              </p>
-              <p className="mx-auto mt-3 max-w-md text-base leading-7 text-[#5B4A3F]">
-                Please check back soon to find your perfect companion.
-              </p>
-            </div>
+            <EmptyState
+              title="No pets available."
+              description="Please check back soon to find your perfect companion."
+            />
+          ) : filteredPets.length === 0 ? (
+            <EmptyState
+              title="No pets found"
+              description="Try a different category or search term to find your perfect companion."
+            />
           ) : (
-            <>
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
-              >
-                {filteredPets.map((pet) => {
-                  const CategoryIcon = categoryIcons[pet.category];
-                  const whatsappHref = createWhatsappHref(pet);
-                  const imageSrc = pet.images?.[0] ?? "/images/pet-placeholder.jpg";
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="mx-auto mt-20 flex w-full flex-wrap items-stretch justify-center gap-8"
+            >
+              {filteredPets.map((pet) => {
+                const CategoryIcon =
+                  categoryIcons[pet.category];
 
-                  return (
-                    <motion.article
-                      key={pet.id}
-                      variants={cardVariants}
-                      whileHover={{ y: -8 }}
-                      transition={{ type: "spring", stiffness: 320, damping: 24 }}
-                      className="group relative overflow-hidden rounded-[2rem] border border-[#ECECEC] bg-white/72 shadow-xl shadow-[#2F2017]/5 backdrop-blur-xl transition-colors duration-300 hover:border-[#D59A3A]"
-                    >
-                      <Link
-                        href={`/pets/${pet.slug}`}
-                        aria-label={`View details for ${pet.name}`}
-                        className="absolute inset-0 z-10 rounded-[2rem] outline-none focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF8F0]"
+                const whatsappHref =
+                  createWhatsappHref(pet);
+
+                const imageSrc =
+                  pet.images?.[0] ??
+                  "/images/pet-placeholder.jpg";
+
+                return (
+                  <motion.article
+                    key={pet.id}
+                    variants={cardVariants}
+                    whileHover={{ y: -6 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 320,
+                      damping: 24,
+                    }}
+                    className="group relative w-full max-w-[360px] overflow-hidden rounded-[2rem] border border-[#3A241A]/10 bg-[#FFF9EF]/72 shadow-[0_20px_55px_rgba(58,36,26,0.08)] backdrop-blur-xl transition duration-300 hover:border-[#C99045]/45 hover:shadow-[0_28px_70px_rgba(58,36,26,0.12)]"
+                  >
+                    <Link
+                      href={`/pets/${pet.slug}`}
+                      aria-label={`View details for ${pet.name}`}
+                      className="absolute inset-0 z-10 rounded-[2rem]"
+                    />
+
+                    <div className="relative aspect-[4/3] overflow-hidden bg-[#FFF4E4]">
+                      <img
+                        src={imageSrc}
+                        alt={pet.name}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-105"
                       />
 
-                      <div className="relative aspect-square overflow-hidden bg-[#FFF8F0]">
-                        <img
-                          src={imageSrc}
-                          alt={pet.name}
-                          loading="lazy"
-                          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                        />
+                      <div className="absolute left-5 top-5">
+                        <span
+                          className={[
+                            "inline-flex min-h-[36px] items-center justify-center rounded-full border px-4 py-2 text-center text-xs font-bold leading-none shadow-lg backdrop-blur-xl",
+                            statusStyles[pet.status],
+                          ].join(" ")}
+                        >
+                          {statusLabels[pet.status]}
+                        </span>
+                      </div>
+                    </div>
 
-                        <div className="absolute left-4 top-4">
-                          <span
-                            className={[
-                              "inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-bold shadow-lg backdrop-blur-xl",
-                              statusStyles[pet.status],
-                            ].join(" ")}
-                          >
-                            {statusLabels[pet.status]}
+                    <div className="relative z-20 p-7">
+                      <div className="flex flex-wrap items-center justify-center gap-3">
+                        <div className="inline-flex min-h-[40px] items-center justify-center gap-2 rounded-full border border-[#3A241A]/10 bg-[#FFF4E4]/72 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-[#9A6429]">
+                          <CategoryIcon
+                            aria-hidden="true"
+                            className="h-4 w-4 shrink-0"
+                            strokeWidth={2}
+                          />
+
+                          <span className="whitespace-nowrap">
+                            {pet.category}
                           </span>
                         </div>
-                      </div>
 
-                      <div className="relative z-20 p-6">
-                        <div className="flex items-center justify-between gap-4">
-                          <div className="inline-flex items-center gap-2 rounded-full border border-[#ECECEC] bg-[#FFF8F0]/70 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[#D59A3A]">
-                            <CategoryIcon
+                        {pet.featured_homepage ? (
+                          <div className="inline-flex min-h-[40px] items-center justify-center gap-2 rounded-full border border-[#3A241A]/10 bg-[#FFF4E4]/72 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.1em] text-[#9A6429]">
+                            <BadgeCheck
                               aria-hidden="true"
-                              className="h-4 w-4"
+                              className="h-4 w-4 shrink-0"
                               strokeWidth={2}
                             />
-                            <span>{pet.category}</span>
+
+                            <span className="whitespace-nowrap">
+                              Featured
+                            </span>
                           </div>
-
-                          {pet.featured_homepage ? (
-                            <div className="inline-flex items-center gap-1.5 rounded-full border border-[#ECECEC] bg-[#FFF8F0]/70 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[#D59A3A]">
-                              <BadgeCheck
-                                aria-hidden="true"
-                                className="h-4 w-4 text-[#D59A3A]"
-                                strokeWidth={2}
-                              />
-                              <span>Featured</span>
-                            </div>
-                          ) : null}
-                        </div>
-
-                        <h3 className="mt-5 font-[Poppins] text-2xl font-bold tracking-tight text-[#2F2017]">
-                          {pet.name}
-                        </h3>
-
-                        {pet.description ? (
-                          <p className="mt-3 line-clamp-2 text-sm leading-6 text-[#5B4A3F]">
-                            {pet.description}
-                          </p>
                         ) : null}
-
-                        <dl className="mt-5 grid gap-3 text-sm">
-                          <div className="flex items-center justify-between gap-4 border-b border-[#ECECEC] pb-3">
-                            <dt className="font-medium text-[#5B4A3F]/80">Breed</dt>
-                            <dd className="text-right font-bold text-[#2F2017]">
-                              {pet.breed}
-                            </dd>
-                          </div>
-
-                          <div className="flex items-center justify-between gap-4 border-b border-[#ECECEC] pb-3">
-                            <dt className="font-medium text-[#5B4A3F]/80">Type</dt>
-                            <dd className="text-right font-bold text-[#2F2017]">
-                              {pet.pet_type}
-                            </dd>
-                          </div>
-
-                          <div className="flex items-center justify-between gap-4 border-b border-[#ECECEC] pb-3">
-                            <dt className="font-medium text-[#5B4A3F]/80">Age</dt>
-                            <dd className="text-right font-bold text-[#2F2017]">
-                              {pet.age ?? ""}
-                            </dd>
-                          </div>
-
-                          <div className="flex items-center justify-between gap-4">
-                            <dt className="font-medium text-[#5B4A3F]/80">Price</dt>
-                            <dd className="text-right font-[Poppins] text-lg font-bold text-[#D59A3A]">
-                              {formatPrice(pet.price)}
-                            </dd>
-                          </div>
-                        </dl>
-
-                        <div className="relative z-30 mt-6 [&_a]:h-12 [&_a]:w-full [&_a]:rounded-full [&_a]:text-sm [&_a]:font-bold">
-                          <Button href={whatsappHref}>Enquire on WhatsApp</Button>
-                        </div>
                       </div>
-                    </motion.article>
-                  );
-                })}
-              </motion.div>
 
-              {filteredPets.length === 0 ? (
-                <div className="mt-14 rounded-[2rem] border border-[#ECECEC] bg-white/58 p-10 text-center shadow-xl shadow-[#2F2017]/5 backdrop-blur-xl">
-                  <PawPrint
-                    aria-hidden="true"
-                    className="mx-auto h-10 w-10 text-[#D59A3A]"
-                    strokeWidth={1.8}
-                  />
-                  <p className="mt-5 font-[Poppins] text-2xl font-bold text-[#2F2017]">
-                    No pets found
-                  </p>
-                  <p className="mx-auto mt-3 max-w-md text-base leading-7 text-[#5B4A3F]">
-                    Try a different category or search term to find your perfect
-                    companion.
-                  </p>
-                </div>
-              ) : null}
-            </>
+                      <h3 className="mt-7 text-center font-[Poppins] text-2xl font-bold leading-tight tracking-[-0.025em] text-[#2A1B14]">
+                        {pet.name}
+                      </h3>
+
+                      {pet.description ? (
+                        <p className="mt-4 line-clamp-2 text-center text-sm leading-7 text-[#5E4A3D]">
+                          {pet.description}
+                        </p>
+                      ) : null}
+
+                      <dl className="mt-7 space-y-1">
+                        <PetDetailRow
+                          label="Breed"
+                          value={pet.breed}
+                        />
+
+                        <PetDetailRow
+                          label="Type"
+                          value={pet.pet_type}
+                        />
+
+                        <PetDetailRow
+                          label="Age"
+                          value={pet.age ?? ""}
+                        />
+
+                        <div className="flex min-h-[58px] items-center justify-between gap-6 pt-4">
+                          <dt className="shrink-0 text-sm font-medium text-[#5E4A3D]/80">
+                            Price
+                          </dt>
+
+                          <dd className="break-words text-right font-[Poppins] text-lg font-bold leading-6 text-[#B77932]">
+                            {formatPrice(pet.price)}
+                          </dd>
+                        </div>
+                      </dl>
+
+                      <div className="relative z-30 mt-8 [&_a]:flex [&_a]:min-h-[56px] [&_a]:w-full [&_a]:items-center [&_a]:justify-center [&_a]:rounded-full [&_a]:px-6 [&_a]:py-4 [&_a]:text-center [&_a]:text-sm [&_a]:font-bold [&_a]:leading-none">
+                        <Button href={whatsappHref}>
+                          Enquire on WhatsApp
+                        </Button>
+                      </div>
+                    </div>
+                  </motion.article>
+                );
+              })}
+            </motion.div>
           )}
 
           <motion.div
             variants={fadeUpVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.35 }}
-            className="mt-20 overflow-hidden rounded-[2.25rem] border border-[#ECECEC] bg-white/58 p-8 text-center shadow-[0_26px_80px_rgba(47,32,23,0.10)] backdrop-blur-2xl sm:p-10 lg:p-12"
+            viewport={{
+              once: true,
+              amount: 0.25,
+            }}
+            className="mx-auto mt-24 flex w-full max-w-[900px] flex-col items-center justify-center overflow-hidden rounded-[2.25rem] border border-[#3A241A]/10 bg-[#FFF9EF]/72 px-8 py-14 text-center shadow-[0_26px_80px_rgba(58,36,26,0.10)] backdrop-blur-2xl sm:px-12 sm:py-16 lg:px-16"
           >
-            <h2 className="font-[Poppins] text-3xl font-bold tracking-tight text-[#2F2017] sm:text-4xl">
+            <h2 className="mx-auto w-full max-w-[760px] text-center font-[Poppins] text-3xl font-bold leading-[1.2] tracking-[-0.03em] text-[#2A1B14] sm:text-4xl">
               Need help choosing the right pet?
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-[#5B4A3F] sm:text-lg">
+
+            <p className="mx-auto mt-6 w-full max-w-[680px] text-center text-base leading-8 text-[#5E4A3D] sm:text-lg sm:leading-9">
               Message Bunny Pets Zone on WhatsApp and our team will guide you
-              with availability, care details and the best match for your family.
+              with availability, care details and the best match for your
+              family.
             </p>
-            <div className="mt-8 flex justify-center [&_a]:h-14 [&_a]:rounded-full [&_a]:px-8 [&_a]:text-base [&_a]:font-bold">
+
+            <div className="mx-auto mt-9 flex w-full items-center justify-center [&_a]:inline-flex [&_a]:min-h-[56px] [&_a]:items-center [&_a]:justify-center [&_a]:rounded-full [&_a]:px-9 [&_a]:py-4 [&_a]:text-center [&_a]:text-base [&_a]:font-bold [&_a]:leading-none">
               <Button
                 href={`https://wa.me/91${businessWhatsapp}?text=${encodeURIComponent(
                   "Hi Bunny Pets Zone,\nI'm looking for a pet. Could you please help me choose the right companion?",
@@ -539,8 +570,54 @@ export default function PetsPage() {
               </Button>
             </div>
           </motion.div>
-        </Container>
+        </div>
       </section>
     </main>
+  );
+}
+
+function PetDetailRow({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="flex min-h-[58px] items-center justify-between gap-6 border-b border-[#3A241A]/10 py-4">
+      <dt className="shrink-0 text-sm font-medium text-[#5E4A3D]/80">
+        {label}
+      </dt>
+
+      <dd className="min-w-0 break-words text-right text-sm font-bold leading-6 text-[#2A1B14]">
+        {value}
+      </dd>
+    </div>
+  );
+}
+
+function EmptyState({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="mx-auto mt-20 flex w-full max-w-[760px] flex-col items-center justify-center rounded-[2rem] border border-[#3A241A]/10 bg-[#FFF9EF]/72 px-8 py-12 text-center shadow-[0_20px_55px_rgba(58,36,26,0.08)] backdrop-blur-xl sm:px-12">
+      <PawPrint
+        aria-hidden="true"
+        className="mx-auto h-11 w-11 text-[#B77932]"
+        strokeWidth={1.8}
+      />
+
+      <p className="mx-auto mt-6 w-full text-center font-[Poppins] text-2xl font-bold leading-tight text-[#2A1B14]">
+        {title}
+      </p>
+
+      <p className="mx-auto mt-4 w-full max-w-[520px] text-center text-base leading-8 text-[#5E4A3D]">
+        {description}
+      </p>
+    </div>
   );
 }

@@ -2,22 +2,14 @@
 
 import { motion, type Variants } from "framer-motion";
 import {
-  Bird,
-  Cat,
-  Dog,
   HeartHandshake,
-  HeartPulse,
   MessageCircle,
-  PawPrint,
   Phone,
   ShieldCheck,
   Sparkles,
-  Users,
 } from "lucide-react";
 import Image from "next/image";
 
-
-import Container from "@/components/layout/Container";
 import Button from "@/components/ui/Button";
 
 const settings = {
@@ -30,60 +22,6 @@ const settings = {
 
 const whatsappHref = `https://wa.me/91${settings.whatsapp}`;
 const phoneHref = `tel:${settings.phone}`;
-
-const whyChooseCards = [
-  {
-    title: "Healthy Pets",
-    description:
-      "We focus on proper care, comfort and attention so every pet has a healthy start.",
-    icon: HeartPulse,
-  },
-  {
-    title: "Wide Variety",
-    description:
-      "Families can explore dogs, cats, birds and hamsters based on their lifestyle.",
-    icon: PawPrint,
-  },
-  {
-    title: "Friendly Guidance",
-    description:
-      "Our team helps you understand pet needs before you make the right choice.",
-    icon: HeartHandshake,
-  },
-  {
-    title: "Happy Families",
-    description:
-      "We love helping customers find companions that bring warmth into their homes.",
-    icon: Users,
-  },
-];
-
-const petCards = [
-  {
-    title: "Dogs",
-    description:
-      "Playful, loyal and loving companions for active and affectionate families.",
-    icon: Dog,
-  },
-  {
-    title: "Cats",
-    description:
-      "Gentle, independent and charming pets that bring calm joy to the home.",
-    icon: Cat,
-  },
-  {
-    title: "Birds",
-    description:
-      "Colorful, cheerful and expressive pets that brighten everyday moments.",
-    icon: Bird,
-  },
-  {
-    title: "Hamsters",
-    description:
-      "Small, adorable companions that are delightful for caring pet lovers.",
-    icon: PawPrint,
-  },
-];
 
 const containerVariants: Variants = {
   hidden: {},
@@ -98,30 +36,13 @@ const containerVariants: Variants = {
 const fadeUpVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 24,
+    y: 22,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.62,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
-const cardVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-    scale: 0.98,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.58,
+      duration: 0.6,
       ease: [0.22, 1, 0.36, 1],
     },
   },
@@ -129,322 +50,208 @@ const cardVariants: Variants = {
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-[#FFF8F0] font-[Inter]">
-      <section className="relative isolate overflow-hidden bg-[#FFF8F0] px-4 pb-20 pt-36 sm:px-6 sm:pb-24 sm:pt-40 lg:px-8 lg:pb-28 lg:pt-44">
+    <main className="min-h-screen w-full overflow-x-hidden bg-[#FFF9EF] font-[Inter]">
+      <section className="relative isolate w-full overflow-hidden">
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(213,154,58,0.15),transparent_30%),radial-gradient(circle_at_86%_24%,rgba(255,214,153,0.32),transparent_28%),linear-gradient(180deg,#FFF8F0_0%,#FFF3E6_52%,#FFF8F0_100%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(213,154,58,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(213,154,58,0.04)_1px,transparent_1px)] bg-[size:52px_52px] [mask-image:radial-gradient(ellipse_at_center,black_0%,transparent_72%)]" />
-          <div className="absolute -left-28 top-20 h-80 w-80 rounded-full bg-[#D59A3A]/10 blur-3xl" />
-          <div className="absolute -right-28 top-36 h-96 w-96 rounded-full bg-orange-200/42 blur-3xl" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(247,235,221,0.9),transparent_34%),radial-gradient(circle_at_84%_24%,rgba(201,144,69,0.12),transparent_30%),linear-gradient(180deg,#FFF9EF_0%,#FFF5E8_54%,#FFF9EF_100%)]" />
+
+          <div className="absolute -left-32 top-48 h-[24rem] w-[24rem] rounded-full bg-[#F7EBDD]/70 blur-3xl" />
+
+          <div className="absolute -right-32 top-80 h-[28rem] w-[28rem] rounded-full bg-[#C99045]/10 blur-3xl" />
         </div>
 
-        <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-[1.04fr_0.96fr] lg:gap-16">
+        <div className="relative left-1/2 w-[calc(100vw-40px)] max-w-[1180px] -translate-x-1/2 pb-24 pt-36 sm:w-[calc(100vw-64px)] sm:pb-28 sm:pt-40 lg:w-[calc(100vw-80px)] lg:pb-32 lg:pt-44">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex w-full flex-col items-center justify-center text-center"
+          >
             <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              className="mx-auto max-w-3xl text-center lg:mx-0 lg:text-left"
+              variants={fadeUpVariants}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-[#3A241A]/10 bg-[#FFF9EF]/80 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#8D5B26] shadow-sm backdrop-blur-xl"
             >
-              <motion.div
-                variants={fadeUpVariants}
-                className="inline-flex items-center gap-2 rounded-full border border-[#ECECEC] bg-white/50 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D59A3A] shadow-lg shadow-[#D59A3A]/5 backdrop-blur-xl"
-              >
-                <Sparkles
-                  aria-hidden="true"
-                  className="h-4 w-4"
-                  strokeWidth={2}
-                />
-                <span>About Us</span>
-              </motion.div>
+              <Sparkles
+                aria-hidden="true"
+                className="h-4 w-4 text-[#B77932]"
+                strokeWidth={2}
+              />
 
-              <motion.h1
-                variants={fadeUpVariants}
-                className="mt-7 text-balance font-[Poppins] text-5xl font-bold leading-tight tracking-tight text-[#2F2017] sm:text-6xl lg:text-7xl"
-              >
-                Helping Families Find Their Perfect Companion
-              </motion.h1>
-
-              <motion.p
-                variants={fadeUpVariants}
-                className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-8 text-[#5B4A3F] sm:text-xl lg:mx-0"
-              >
-                At {settings.businessName}, we believe every pet deserves a
-                loving home and every family deserves the perfect companion. We
-                are committed to helping customers choose healthy, well-cared-for
-                pets.
-              </motion.p>
+              <span>About Us</span>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 34, scale: 0.98 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{
-                duration: 0.78,
-                ease: [0.22, 1, 0.36, 1],
-                delay: 0.16,
-              }}
-              className="relative mx-auto w-full max-w-lg"
-              aria-label={`${settings.businessName} logo`}
+            <motion.h1
+              variants={fadeUpVariants}
+              className="mt-8 w-full max-w-[900px] text-center font-[Poppins] text-4xl font-bold leading-[1.08] tracking-tight text-[#2A1B14] sm:text-5xl lg:text-6xl"
             >
-              <div className="absolute left-1/2 top-1/2 -z-10 h-[24rem] w-[24rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D59A3A]/14 blur-3xl" />
+              Helping Families Find
+              <span className="block text-[#9A6429]">
+                Their Perfect Companion
+              </span>
+            </motion.h1>
 
-              <div className="relative overflow-hidden rounded-[2.5rem] border border-[#ECECEC] bg-white/48 p-8 shadow-[0_28px_90px_rgba(47,32,23,0.12)] backdrop-blur-2xl sm:p-10">
-                <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#D59A3A]/12 blur-3xl" />
-                <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-orange-200/36 blur-3xl" />
+            <motion.p
+              variants={fadeUpVariants}
+              className="mt-7 w-full max-w-[720px] text-center text-base leading-8 text-[#5E4A3D] sm:text-lg"
+            >
+              At {settings.businessName}, we believe every pet deserves a
+              loving home and every family deserves a companion that feels
+              right.
+            </motion.p>
 
-                <div className="relative mx-auto flex aspect-square max-w-[360px] items-center justify-center rounded-[2rem] border border-white/70 bg-[#FFF8F0]/72 p-10 shadow-2xl shadow-[#D59A3A]/10">
+            <motion.div
+              variants={fadeUpVariants}
+              className="relative mt-14 flex w-full justify-center"
+            >
+              <div className="pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#C99045]/14 blur-3xl" />
+
+              <div className="relative flex h-[330px] w-[330px] items-center justify-center overflow-hidden rounded-[2.25rem] border border-[#3A241A]/10 bg-white/70 p-5 shadow-[0_24px_70px_rgba(58,36,26,0.09)] backdrop-blur-xl sm:h-[380px] sm:w-[380px]">
+                <div className="relative h-full w-full overflow-hidden rounded-[1.75rem] bg-white">
                   <Image
                     src={settings.logo}
                     alt={`${settings.businessName} logo`}
-                    width={320}
-                    height={320}
+                    fill
                     priority
-                    className="h-auto w-full object-contain"
+                    sizes="(max-width: 640px) 290px, 340px"
+                    className="object-contain"
                   />
                 </div>
               </div>
             </motion.div>
-          </div>
-        </Container>
+          </motion.div>
+        </div>
       </section>
 
-      <section className="relative bg-[#FFF8F0] px-4 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
-        <Container>
+      <section className="relative isolate w-full overflow-hidden bg-[#FFF9EF]">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,#FFF9EF_0%,#FFF5E8_50%,#FFF9EF_100%)]" />
+
+          <div className="absolute left-1/2 top-1/2 h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F7EBDD]/60 blur-3xl" />
+        </div>
+
+        <div className="relative left-1/2 w-[calc(100vw-40px)] max-w-[1180px] -translate-x-1/2 py-24 sm:w-[calc(100vw-64px)] sm:py-28 lg:w-[calc(100vw-80px)] lg:py-32">
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.25 }}
-            className="grid items-start gap-10 lg:grid-cols-[0.82fr_1.18fr]"
+            viewport={{ once: true, amount: 0.2 }}
+            className="flex w-full flex-col items-center justify-center text-center"
           >
-            <motion.div variants={fadeUpVariants}>
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#ECECEC] bg-white/50 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D59A3A] shadow-lg shadow-[#D59A3A]/5 backdrop-blur-xl">
-                <ShieldCheck
-                  aria-hidden="true"
-                  className="h-4 w-4"
-                  strokeWidth={2}
-                />
-                <span>Our Story</span>
-              </div>
+            <motion.div
+              variants={fadeUpVariants}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-[#3A241A]/10 bg-[#FFF9EF]/80 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#8D5B26] shadow-sm backdrop-blur-xl"
+            >
+              <ShieldCheck
+                aria-hidden="true"
+                className="h-4 w-4 text-[#B77932]"
+                strokeWidth={2}
+              />
 
-              <h2 className="mt-7 font-[Poppins] text-4xl font-bold leading-tight tracking-tight text-[#2F2017] sm:text-5xl">
-                Our Story
-              </h2>
+              <span>Our Story</span>
             </motion.div>
+
+            <motion.h2
+              variants={fadeUpVariants}
+              className="mt-8 w-full max-w-[900px] text-center font-[Poppins] text-4xl font-bold leading-[1.1] tracking-tight text-[#2A1B14] sm:text-5xl lg:text-6xl"
+            >
+              Built Around Care,
+              <span className="block text-[#9A6429]">
+                Trust & Happy Families
+              </span>
+            </motion.h2>
 
             <motion.div
               variants={fadeUpVariants}
-              className="rounded-[2.25rem] border border-[#ECECEC] bg-white/54 p-7 shadow-xl shadow-[#2F2017]/5 backdrop-blur-xl sm:p-9"
+              className="mt-12 w-full max-w-[820px] rounded-[2rem] border border-[#3A241A]/10 bg-white/58 px-7 py-10 text-center shadow-[0_24px_70px_rgba(58,36,26,0.07)] backdrop-blur-xl sm:px-12 sm:py-12"
             >
-              <div className="space-y-6 text-lg leading-9 text-[#5B4A3F]">
+              <HeartHandshake
+                aria-hidden="true"
+                className="mx-auto h-10 w-10 text-[#B77932]"
+                strokeWidth={1.7}
+              />
+
+              <div className="mt-8 space-y-7 text-center text-base leading-8 text-[#5E4A3D] sm:text-lg sm:leading-9">
                 <p>
                   {settings.businessName} is a local pet store in{" "}
-                  {settings.address}, built around a simple promise: help
+                  {settings.address}, built around a simple promise: helping
                   families choose pets with confidence, care and clarity.
                 </p>
 
                 <p>
                   We help customers explore dogs, cats, birds and hamsters while
-                  understanding the kind of care, attention and environment each
-                  pet needs. Our approach is warm, honest and focused on making
-                  the match feel right for both the pet and the family.
+                  understanding the care, attention and environment each pet
+                  needs.
                 </p>
 
                 <p>
                   Whether you are welcoming your first pet or adding another
-                  companion to your home, our team is here to guide you with
-                  friendly support and practical information.
+                  companion to your family, our team is here with friendly
+                  support and practical guidance.
                 </p>
               </div>
             </motion.div>
           </motion.div>
-        </Container>
+        </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#FFF8F0] px-4 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
-        <Container>
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.25 }}
-            className="mx-auto max-w-3xl text-center"
-          >
-            <motion.div
-              variants={fadeUpVariants}
-              className="inline-flex items-center gap-2 rounded-full border border-[#ECECEC] bg-white/50 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D59A3A] shadow-lg shadow-[#D59A3A]/5 backdrop-blur-xl"
-            >
-              <Sparkles aria-hidden="true" className="h-4 w-4" strokeWidth={2} />
-              <span>Why Choose Us</span>
-            </motion.div>
-
-            <motion.h2
-              variants={fadeUpVariants}
-              className="mt-7 text-balance font-[Poppins] text-4xl font-bold leading-tight tracking-tight text-[#2F2017] sm:text-5xl lg:text-6xl"
-            >
-              Why Choose {settings.businessName}
-            </motion.h2>
-          </motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.18 }}
-            className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
-          >
-            {whyChooseCards.map((card) => {
-              const Icon = card.icon;
-
-              return (
-                <motion.article
-                  key={card.title}
-                  variants={cardVariants}
-                  whileHover={{ y: -8 }}
-                  transition={{ type: "spring", stiffness: 320, damping: 24 }}
-                  className="group rounded-[2rem] border border-[#ECECEC] bg-white/54 p-7 shadow-xl shadow-[#2F2017]/5 backdrop-blur-xl transition-colors duration-300 hover:border-[#D59A3A]"
-                >
-                  <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#D59A3A]/12 text-[#D59A3A] shadow-lg shadow-[#D59A3A]/10 transition-transform duration-300 group-hover:scale-110">
-                    <Icon
-                      aria-hidden="true"
-                      className="h-8 w-8"
-                      strokeWidth={1.8}
-                    />
-                  </div>
-
-                  <h3 className="mt-8 font-[Poppins] text-2xl font-bold tracking-tight text-[#2F2017]">
-                    {card.title}
-                  </h3>
-
-                  <p className="mt-4 text-base leading-8 text-[#5B4A3F]">
-                    {card.description}
-                  </p>
-                </motion.article>
-              );
-            })}
-          </motion.div>
-        </Container>
-      </section>
-
-      <section className="relative bg-[#FFF8F0] px-4 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
-        <Container>
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.25 }}
-            className="mx-auto max-w-3xl text-center"
-          >
-            <motion.div
-              variants={fadeUpVariants}
-              className="inline-flex items-center gap-2 rounded-full border border-[#ECECEC] bg-white/50 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D59A3A] shadow-lg shadow-[#D59A3A]/5 backdrop-blur-xl"
-            >
-              <PawPrint aria-hidden="true" className="h-4 w-4" strokeWidth={2} />
-              <span>Our Pets</span>
-            </motion.div>
-
-            <motion.h2
-              variants={fadeUpVariants}
-              className="mt-7 text-balance font-[Poppins] text-4xl font-bold leading-tight tracking-tight text-[#2F2017] sm:text-5xl lg:text-6xl"
-            >
-              Pets for Every Loving Family
-            </motion.h2>
-          </motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.18 }}
-            className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
-          >
-            {petCards.map((card) => {
-              const Icon = card.icon;
-
-              return (
-                <motion.article
-                  key={card.title}
-                  variants={cardVariants}
-                  whileHover={{ y: -8, scale: 1.01 }}
-                  transition={{ type: "spring", stiffness: 320, damping: 24 }}
-                  className="group rounded-[2rem] border border-[#ECECEC] bg-white/54 p-8 text-center shadow-xl shadow-[#2F2017]/5 backdrop-blur-xl transition-colors duration-300 hover:border-[#D59A3A]"
-                >
-                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-[1.75rem] bg-[#D59A3A]/12 text-[#D59A3A] shadow-lg shadow-[#D59A3A]/10 transition-transform duration-300 group-hover:scale-110">
-                    <Icon
-                      aria-hidden="true"
-                      className="h-10 w-10"
-                      strokeWidth={1.7}
-                    />
-                  </div>
-
-                  <h3 className="mt-8 font-[Poppins] text-2xl font-bold tracking-tight text-[#2F2017]">
-                    {card.title}
-                  </h3>
-
-                  <p className="mt-4 text-base leading-8 text-[#5B4A3F]">
-                    {card.description}
-                  </p>
-                </motion.article>
-              );
-            })}
-          </motion.div>
-        </Container>
-      </section>
-
-      <section className="relative bg-[#FFF8F0] px-4 pb-24 sm:px-6 sm:pb-28 lg:px-8 lg:pb-32">
-        <Container>
+      <section className="relative isolate w-full overflow-hidden bg-[#FFF9EF]">
+        <div className="relative left-1/2 w-[calc(100vw-40px)] max-w-[1180px] -translate-x-1/2 pb-24 pt-8 sm:w-[calc(100vw-64px)] sm:pb-28 lg:w-[calc(100vw-80px)] lg:pb-32">
           <motion.div
             variants={fadeUpVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.35 }}
-            className="relative overflow-hidden rounded-[2.25rem] border border-[#ECECEC] bg-white/58 p-8 text-center shadow-[0_26px_80px_rgba(47,32,23,0.10)] backdrop-blur-2xl sm:p-10 lg:p-12"
+            viewport={{ once: true, amount: 0.3 }}
+            className="relative mx-auto w-full max-w-[900px] overflow-hidden rounded-[2rem] border border-[#3A241A]/10 bg-white/60 px-7 py-12 text-center shadow-[0_26px_80px_rgba(58,36,26,0.08)] backdrop-blur-xl sm:px-12 sm:py-14"
           >
-            <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#D59A3A]/12 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-orange-200/38 blur-3xl" />
+            <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#C99045]/12 blur-3xl" />
 
-            <div className="relative z-10">
-              <h2 className="font-[Poppins] text-3xl font-bold tracking-tight text-[#2F2017] sm:text-4xl">
-                Visit {settings.businessName} Today
+            <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-[#F7EBDD]/80 blur-3xl" />
+
+            <div className="relative z-10 flex w-full flex-col items-center justify-center text-center">
+              <Sparkles
+                aria-hidden="true"
+                className="h-8 w-8 text-[#B77932]"
+                strokeWidth={1.8}
+              />
+
+              <h2 className="mt-6 w-full text-center font-[Poppins] text-3xl font-bold leading-tight tracking-tight text-[#2A1B14] sm:text-4xl lg:text-5xl">
+                Visit {settings.businessName}
               </h2>
 
-              <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-[#5B4A3F] sm:text-lg">
-                Whether you're looking for a playful puppy, a friendly kitten,
-                colorful birds or adorable hamsters, we're here to help you find
-                the perfect companion.
+              <p className="mt-6 w-full max-w-[620px] text-center text-base leading-8 text-[#5E4A3D] sm:text-lg">
+                Looking for a new companion? Visit us in Kondapur or speak with
+                our team to know more about available pets.
               </p>
 
-              <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row [&_a]:h-14 [&_a]:rounded-full [&_a]:px-8 [&_a]:text-base [&_a]:font-bold">
+              <div className="mt-9 flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row [&_a]:min-h-14 [&_a]:w-full [&_a]:rounded-full [&_a]:px-8 [&_a]:text-base [&_a]:font-bold sm:[&_a]:w-auto">
                 <Button href={whatsappHref}>
-                  <span className="inline-flex items-center gap-2">
+                  <span className="inline-flex items-center justify-center gap-2">
                     <MessageCircle
                       aria-hidden="true"
                       className="h-5 w-5"
                       strokeWidth={2}
                     />
+
                     Chat on WhatsApp
                   </span>
                 </Button>
 
                 <Button href={phoneHref} variant="secondary">
-                  <span className="inline-flex items-center gap-2">
+                  <span className="inline-flex items-center justify-center gap-2">
                     <Phone
                       aria-hidden="true"
                       className="h-5 w-5"
                       strokeWidth={2}
                     />
+
                     Call Now
                   </span>
                 </Button>
               </div>
             </div>
           </motion.div>
-        </Container>
+        </div>
       </section>
-
-      
-     
     </main>
   );
 }
