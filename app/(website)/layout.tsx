@@ -1,3 +1,4 @@
+import EntranceReveal from "@/components/animations/EntranceReveal";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingActions from "@/components/layout/FloatingActions";
@@ -9,6 +10,8 @@ export default function WebsiteLayout({
 }) {
   return (
     <div className="min-h-screen bg-[#FFF8F0]">
+      <EntranceReveal />
+
       <Navbar />
 
       <main>{children}</main>
