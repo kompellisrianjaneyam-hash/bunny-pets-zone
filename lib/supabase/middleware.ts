@@ -14,7 +14,16 @@ export async function updateSession(request: NextRequest) {
         getAll() {
           return request.cookies.getAll();
         },
+
         setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value)
+          );
+
+          response = NextResponse.next({
+            request,
+          });
+
           cookiesToSet.forEach(({ name, value, options }) =>
             response.cookies.set(name, value, options)
           );
@@ -23,7 +32,28 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const pathname = request.nextUrl.pathname;
+
+  const isAdminRoute = pathname.startsWith("/admin");
+  const isLoginPage = pathname === "/admin/login";
+
+  if (isAdminRoute && !isLoginPage && !user) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/admin/login";
+
+    return NextResponse.redirect(url);
+  }
+
+  if (isLoginPage && user) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/admin";
+
+    return NextResponse.redirect(url);
+  }
 
   return response;
 }

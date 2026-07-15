@@ -19,7 +19,7 @@ import {
   type ComponentType,
 } from "react";
 
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabase/client";
 
 type NavigationItem = {
   label: string;
@@ -111,27 +111,27 @@ function SidebarContent({
       return;
     }
 
-    try {
-      setIsLoggingOut(true);
+    setIsLoggingOut(true);
 
-      const { error } = await supabase.auth.signOut();
+    try {
+      const supabase = createClient();
+
+      const { error } = await supabase.auth.signOut({
+        scope: "local",
+      });
 
       if (error) {
         console.error("Logout error:", error);
-
         setIsLoggingOut(false);
-
         return;
       }
 
       onNavigate?.();
 
       router.replace("/admin/login");
-
       router.refresh();
     } catch (error) {
       console.error("Unexpected logout error:", error);
-
       setIsLoggingOut(false);
     }
   };
@@ -223,14 +223,10 @@ function SidebarContent({
       <div className="mt-auto pt-6">
         <button
           type="button"
-          aria-label={
-            isLoggingOut
-              ? "Logging out"
-              : "Logout"
-          }
+          aria-label={isLoggingOut ? "Logging out" : "Logout"}
           disabled={isLoggingOut}
           onClick={handleLogout}
-          className="group flex h-13 w-full items-center gap-3 rounded-[1.35rem] border border-[#ECECEC] bg-white/58 px-4 text-sm font-bold text-[#5B4A3F] shadow-lg shadow-[#2F2017]/5 outline-none backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-[#D59A3A]/45 hover:text-[#D59A3A] focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+          className="group flex h-13 w-full items-center gap-3 rounded-[1.35rem] border border-[#ECECEC] bg-white/58 px-4 text-sm font-bold text-[#5B4A3F] shadow-lg shadow-[#2F2017]/5 outline-none backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-[#D59A3A]/45 hover:text-[#D59A3A] focus-visible:ring-2 focus-visible:ring-[#D59A3A] focus-visible:ring-offset-4 focus-visible:ring-offset-white disabled:cursor-wait disabled:opacity-70 disabled:hover:translate-y-0"
         >
           <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-[#D59A3A]/10 text-[#D59A3A] transition duration-300 group-hover:scale-105">
             {isLoggingOut ? (
@@ -249,9 +245,7 @@ function SidebarContent({
           </span>
 
           <span>
-            {isLoggingOut
-              ? "Logging out..."
-              : "Logout"}
+            {isLoggingOut ? "Logging out..." : "Logout"}
           </span>
         </button>
       </div>
@@ -387,9 +381,7 @@ export default function DashboardSidebar() {
                 </button>
 
                 <SidebarContent
-                  onNavigate={() =>
-                    setIsOpen(false)
-                  }
+                  onNavigate={() => setIsOpen(false)}
                 />
               </div>
             </motion.aside>
