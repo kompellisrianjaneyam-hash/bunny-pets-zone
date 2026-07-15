@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import Button from "@/components/ui/Button";
 import { getAllPets, type Pet } from "@/lib/pets";
 
 const settings = {
@@ -352,38 +351,36 @@ export default function FeaturedPets() {
                     ) : null}
                   </div>
 
-                  <div className="flex flex-1 flex-col p-6 sm:p-7">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="min-w-0 flex-1">
-                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#B77932]">
-                          Companion
-                        </p>
+                  <div className="flex flex-1 flex-col px-5 pb-6 pt-6 min-[390px]:px-6 sm:p-7">
+                    <div className="relative pr-12">
+                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#B77932]">
+                        Companion
+                      </p>
 
-                        <h3 className="mt-2 break-words font-[Poppins] text-2xl font-bold leading-tight tracking-[-0.025em] text-[#2A1B14]">
-                          {pet.name}
-                        </h3>
-                      </div>
+                      <h3 className="mt-2 break-words font-[Poppins] text-2xl font-bold leading-tight tracking-[-0.025em] text-[#2A1B14]">
+                        {pet.name}
+                      </h3>
 
                       <Heart
                         aria-hidden="true"
-                        className="mt-1 h-6 w-6 shrink-0 text-[#C99045]"
+                        className="absolute right-1 top-2 h-6 w-6 text-[#C99045] sm:right-2"
                         strokeWidth={1.8}
                       />
                     </div>
 
-                    <p className="mt-3 break-words text-base font-semibold leading-7 text-[#5B4A3F]">
+                    <p className="mt-3 break-words pr-2 text-base font-semibold leading-7 text-[#5B4A3F]">
                       {pet.breed}
                       {pet.pet_type ? `/${pet.pet_type}` : ""}
                     </p>
 
                     {pet.description ? (
-                      <p className="mt-3 break-words text-sm leading-7 text-[#5B4A3F]">
+                      <p className="mt-3 break-words pr-2 text-sm leading-7 text-[#5B4A3F]">
                         {pet.description}
                       </p>
                     ) : null}
 
                     <dl className="mt-7 overflow-hidden rounded-[1.4rem] border border-[#C99045]/25 bg-[#FFFDF9]">
-                      <div className="grid min-h-[64px] grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-center gap-4 border-b border-[#3A241A]/10 px-5 py-4 sm:px-6">
+                      <div className="grid min-h-[64px] grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-center gap-3 border-b border-[#3A241A]/10 px-4 py-4 min-[390px]:px-5 sm:px-6">
                         <dt className="flex min-w-0 items-center gap-3 text-sm font-semibold text-[#A76519]">
                           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#FFF4E4]">
                             <PawPrint
@@ -395,14 +392,14 @@ export default function FeaturedPets() {
                           <span>Breed</span>
                         </dt>
 
-                        <dd className="min-w-0 text-right text-sm font-bold leading-5 text-[#2A1B14]">
-                          <span className="ml-auto block max-w-[155px] break-words pr-1">
+                        <dd className="min-w-0 pr-2 text-right text-sm font-bold leading-5 text-[#2A1B14] min-[390px]:pr-3">
+                          <span className="ml-auto block max-w-[150px] break-words">
                             {pet.breed}
                           </span>
                         </dd>
                       </div>
 
-                      <div className="grid min-h-[64px] grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-center gap-4 border-b border-[#3A241A]/10 px-5 py-4 sm:px-6">
+                      <div className="grid min-h-[64px] grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-center gap-3 border-b border-[#3A241A]/10 px-4 py-4 min-[390px]:px-5 sm:px-6">
                         <dt className="flex min-w-0 items-center gap-3 text-sm font-semibold text-[#A76519]">
                           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#FFF4E4]">
                             <CategoryIcon
@@ -414,14 +411,14 @@ export default function FeaturedPets() {
                           <span>Type</span>
                         </dt>
 
-                        <dd className="min-w-0 text-right text-sm font-bold leading-5 text-[#2A1B14]">
-                          <span className="ml-auto block max-w-[155px] break-words pr-1">
+                        <dd className="min-w-0 pr-2 text-right text-sm font-bold leading-5 text-[#2A1B14] min-[390px]:pr-3">
+                          <span className="ml-auto block max-w-[150px] break-words">
                             {pet.pet_type || pet.category}
                           </span>
                         </dd>
                       </div>
 
-                      <div className="grid min-h-[64px] grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-center gap-4 border-b border-[#3A241A]/10 px-5 py-4 sm:px-6">
+                      <div className="grid min-h-[64px] grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-center gap-3 border-b border-[#3A241A]/10 px-4 py-4 min-[390px]:px-5 sm:px-6">
                         <dt className="flex min-w-0 items-center gap-3 text-sm font-semibold text-[#A76519]">
                           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#FFF4E4]">
                             <CalendarDays
@@ -433,14 +430,14 @@ export default function FeaturedPets() {
                           <span>Age</span>
                         </dt>
 
-                        <dd className="min-w-0 text-right text-sm font-bold leading-5 text-[#2A1B14]">
-                          <span className="ml-auto block max-w-[155px] break-words pr-1">
+                        <dd className="min-w-0 pr-2 text-right text-sm font-bold leading-5 text-[#2A1B14] min-[390px]:pr-3">
+                          <span className="ml-auto block max-w-[150px] break-words">
                             {pet.age || "Not specified"}
                           </span>
                         </dd>
                       </div>
 
-                      <div className="grid min-h-[68px] grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-center gap-4 px-5 py-4 sm:px-6">
+                      <div className="grid min-h-[68px] grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-center gap-3 px-4 py-4 min-[390px]:px-5 sm:px-6">
                         <dt className="flex min-w-0 items-center gap-3 text-sm font-semibold text-[#A76519]">
                           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#FFF4E4] text-base font-bold">
                             ₹
@@ -449,8 +446,8 @@ export default function FeaturedPets() {
                           <span>Price</span>
                         </dt>
 
-                        <dd className="min-w-0 text-right font-[Poppins] text-lg font-bold leading-6 text-[#A76519]">
-                          <span className="ml-auto block max-w-[165px] break-words pr-1">
+                        <dd className="min-w-0 pr-2 text-right font-[Poppins] text-lg font-bold leading-6 text-[#A76519] min-[390px]:pr-3">
+                          <span className="ml-auto block max-w-[160px] break-words">
                             {formatPrice(pet.price)}
                           </span>
                         </dd>
@@ -460,28 +457,28 @@ export default function FeaturedPets() {
                     <div className="mt-7 grid grid-cols-1 gap-3 min-[390px]:grid-cols-2">
                       <a
                         href={`tel:${settings.phone}`}
-                        className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full border border-[#B77932]/45 bg-[#FFF9EF] px-4 py-3 text-center text-sm font-bold text-[#8D5B26] shadow-lg transition duration-300 hover:-translate-y-0.5 hover:bg-[#FFF4E4]"
+                        className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full border border-[#B77932]/45 bg-[#FFF9EF] px-5 py-3 text-center text-sm font-bold text-[#8D5B26] shadow-lg transition duration-300 hover:-translate-y-0.5 hover:bg-[#FFF4E4]"
                       >
                         <Phone
                           className="h-5 w-5 shrink-0 text-[#B77932]"
                           strokeWidth={2}
                         />
 
-                        <span>Call Now</span>
+                        <span className="whitespace-nowrap">Call Now</span>
                       </a>
 
                       <a
                         href={whatsappHref}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#0AA66A] px-4 py-3 text-center text-sm font-bold text-white shadow-lg transition duration-300 hover:-translate-y-0.5 hover:bg-[#078C59]"
+                        className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#0AA66A] px-5 py-3 text-center text-sm font-bold text-white shadow-lg transition duration-300 hover:-translate-y-0.5 hover:bg-[#078C59]"
                       >
                         <MessageCircle
                           className="h-5 w-5 shrink-0"
                           strokeWidth={2}
                         />
 
-                        <span>WhatsApp</span>
+                        <span className="whitespace-nowrap">WhatsApp</span>
                       </a>
                     </div>
                   </div>
@@ -496,11 +493,14 @@ export default function FeaturedPets() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
-          className="mx-auto mt-16 flex w-full items-center justify-center"
+          className="mx-auto mt-16 flex w-full items-center justify-center px-4"
         >
-          <div className="[&_a]:inline-flex [&_a]:min-h-[56px] [&_a]:items-center [&_a]:justify-center [&_a]:rounded-full [&_a]:px-8 [&_a]:py-4 [&_a]:text-center [&_a]:text-sm [&_a]:font-bold">
-            <Button href="/pets">View All Pets</Button>
-          </div>
+          <a
+            href="/pets"
+            className="inline-flex min-h-[60px] min-w-[190px] items-center justify-center whitespace-nowrap rounded-full bg-[#DFA02D] px-8 py-4 text-center text-base font-bold leading-none text-white shadow-[0_14px_32px_rgba(183,121,50,0.22)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#C98E28] hover:shadow-[0_18px_38px_rgba(183,121,50,0.28)]"
+          >
+            View All Pets
+          </a>
         </motion.div>
       </div>
     </section>
