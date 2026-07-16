@@ -307,49 +307,50 @@ export default function FeaturedPets() {
                   }}
                   className="group relative flex w-full max-w-[410px] flex-col overflow-hidden rounded-[2rem] border border-[#3A241A]/10 bg-[#FFF9EF]/78 shadow-[0_20px_55px_rgba(58,36,26,0.08)] backdrop-blur-xl transition duration-300 hover:border-[#C99045]/45 hover:shadow-[0_28px_70px_rgba(58,36,26,0.12)]"
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden bg-[#FFF4E4]">
-                    <img
-                      src={imageSrc}
-                      alt={pet.name}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-105"
-                    />
+      <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#FFF8EE] via-[#FFF4E6] to-[#FDF0DE] p-5">
+  <div
+    className="
+      relative
+      flex
+      h-full
+      w-full
+      items-center
+      justify-center
+      overflow-hidden
+      rounded-[1.6rem]
+      border
+      border-white/70
+      bg-white
+      shadow-[0_18px_45px_rgba(58,36,26,0.10)]
+    "
+  >
+    <img
+      src={imageSrc}
+      alt={pet.name}
+      loading="lazy"
+      className="
+        max-h-full
+        max-w-full
+        object-contain
+        transition-transform
+        duration-500
+        ease-out
+        group-hover:scale-105
+      "
+    />
+  </div>
 
-                    <div className="absolute left-5 top-5">
-                      <span
-                        className={[
-                          "inline-flex min-h-[36px] items-center justify-center rounded-full border px-4 py-2 text-center text-xs font-bold leading-none shadow-lg backdrop-blur-xl",
-                          statusStyles[pet.status],
-                        ].join(" ")}
-                      >
-                        {statusLabels[pet.status]}
-                      </span>
-                    </div>
-
-                    <div className="absolute bottom-5 left-5">
-                      <div className="inline-flex min-h-[38px] items-center justify-center gap-2 rounded-full border border-[#C99045]/30 bg-[#FFF9EF]/95 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-[#9A6429] shadow-lg backdrop-blur-xl">
-                        <CategoryIcon
-                          aria-hidden="true"
-                          className="h-4 w-4 shrink-0"
-                          strokeWidth={2}
-                        />
-
-                        <span>{pet.category}</span>
-                      </div>
-                    </div>
-
-                    {pet.featured_homepage ? (
-                      <div className="absolute bottom-5 right-5">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#C99045]/25 bg-[#FFF9EF]/95 text-[#B77932] shadow-lg backdrop-blur-xl">
-                          <BadgeCheck
-                            aria-hidden="true"
-                            className="h-5 w-5"
-                            strokeWidth={2}
-                          />
-                        </div>
-                      </div>
-                    ) : null}
-                  </div>
+  <div className="absolute left-5 top-5">
+    <span
+      className={[
+        "inline-flex min-h-[36px] items-center justify-center rounded-full border px-4 py-2 text-center text-xs font-bold leading-none shadow-lg backdrop-blur-xl",
+        statusStyles[pet.status],
+      ].join(" ")}
+    >
+      {statusLabels[pet.status]}
+    </span>
+  </div>
+</div>
 
                   <div className="flex flex-1 flex-col px-5 pb-6 pt-6 min-[390px]:px-6 sm:p-7">
                     <div className="relative pr-12">

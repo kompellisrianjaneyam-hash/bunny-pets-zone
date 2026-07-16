@@ -440,25 +440,50 @@ export default function PetsPage() {
                       className="absolute inset-0 z-10 rounded-[2rem]"
                     />
 
-                    <div className="relative aspect-[4/3] overflow-hidden bg-[#FFF4E4]">
-                      <img
-                        src={imageSrc}
-                        alt={pet.name}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-105"
-                      />
+               <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#FFF8EE] via-[#FFF4E6] to-[#FDF0DE] p-5">
+  <div
+    className="
+      relative
+      flex
+      h-full
+      w-full
+      items-center
+      justify-center
+      overflow-hidden
+      rounded-[1.6rem]
+      border
+      border-white/70
+      bg-white
+      shadow-[0_18px_45px_rgba(58,36,26,0.10)]
+    "
+  >
+    <img
+      src={imageSrc}
+      alt={pet.name}
+      loading="lazy"
+      className="
+        max-h-full
+        max-w-full
+        object-contain
+        transition-transform
+        duration-500
+        ease-out
+        group-hover:scale-105
+      "
+    />
+  </div>
 
-                      <div className="absolute left-5 top-5">
-                        <span
-                          className={[
-                            "inline-flex min-h-[36px] items-center justify-center rounded-full border px-4 py-2 text-center text-xs font-bold leading-none shadow-lg backdrop-blur-xl",
-                            statusStyles[pet.status],
-                          ].join(" ")}
-                        >
-                          {statusLabels[pet.status]}
-                        </span>
-                      </div>
-                    </div>
+  <div className="absolute left-5 top-5">
+    <span
+      className={[
+        "inline-flex min-h-[36px] items-center justify-center rounded-full border px-4 py-2 text-center text-xs font-bold leading-none shadow-lg backdrop-blur-xl",
+        statusStyles[pet.status],
+      ].join(" ")}
+    >
+      {statusLabels[pet.status]}
+    </span>
+  </div>
+</div>
 
                     <div className="relative z-20 p-7">
                       <div className="flex flex-wrap items-center justify-center gap-3">
