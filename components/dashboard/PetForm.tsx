@@ -48,11 +48,16 @@ const modalVariants: Variants = {
 };
 
 function createSlug(value: string) {
-  return value
+  const baseSlug = value
     .trim()
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+
+  // Unique suffix based on current timestamp
+  const unique = Date.now().toString();
+
+  return `${baseSlug}-${unique}`;
 }
 
 function mapStatus(value: string): PetStatus {
