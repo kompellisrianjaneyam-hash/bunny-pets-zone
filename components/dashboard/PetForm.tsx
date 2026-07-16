@@ -138,7 +138,7 @@ export default function PetForm({ open, onClose, onSuccess, pet = null }: PetFor
 
       const petData: CreatePetInput = {
         name: petName,
-        slug: createSlug(petName),
+       slug: pet?.slug ?? createSlug(petName),
         category: category as PetCategory,
         breed,
         pet_type: petType,
