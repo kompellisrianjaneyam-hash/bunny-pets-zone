@@ -43,7 +43,20 @@ export async function getAllPets() {
 
   return data as Pet[];
 }
+export async function getPetBySlug(slug: string) {
+  const { data, error } = await supabase
+    .from("pets")
+    .select("*")
+    .eq("slug", slug)
+    .single();
 
+  if (error) {
+    console.error(error);
+    return null;
+  }
+
+  return data as Pet;
+}
 export async function deletePet(id: string) {
   const { error } = await supabase
     .from("pets")
