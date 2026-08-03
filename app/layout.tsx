@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const siteUrl = "https://bunny-pets-zone.vercel.app";
+const siteUrl = "https://www.bunnypetszone.in";
 
 const petStoreJsonLd = {
   "@context": "https://schema.org",
@@ -146,4 +146,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+} 
